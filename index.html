@@ -172,6 +172,7 @@
           <span id="fx-status" style="font-size:9px;color:var(--text-gray);display:none"></span>
         </div>
         <div class="topbar-right">
+          <span id="sheets-sync-badge" title="Sincronización con Google Sheets" style="display:none;font-size:11px;font-weight:600;padding:4px 10px;border-radius:12px;background:#e8f4ea;color:#2d6a4f;cursor:default">☁ Guardado</span>
           <span class="topbar-badge" id="user-badge">Usuario</span>
           <button class="btn btn-secondary" onclick="exportContextual()"><span class="nav-ico" id="ico-csv"></span> CSV</button>
           <button class="btn" onclick="openNewClientModal()">+ Cliente</button>
@@ -660,6 +661,12 @@ const ICO={
   dot_gray:'<svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#ccc"/></svg>',
   clock:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
 };
+
+// ─── GOOGLE SHEETS SYNC ──────────────────────────────────────
+// Pega aquí la URL de tu Apps Script Web App después de desplegarlo.
+// Ejemplo: 'https://script.google.com/macros/s/XXXXXX/exec'
+const SHEETS_API_URL = '';
+// ─────────────────────────────────────────────────────────────
 
 // Platform system variables
 let currentPlatform = sessionStorage.getItem('baum_platform') || 'baumapp';
@@ -1218,7 +1225,69 @@ function persist(){
   }
   localStorage.setItem('baum_fx',fxRate.toString());
   localStorage.setItem('ba_baum_billing',JSON.stringify(ba_billing));
+  // Sync a Google Sheets (fire-and-forget, no bloquea la UI)
+  _syncToSheets();
 }
+
+// ─── GOOGLE SHEETS SYNC FUNCTIONS ────────────────────────────
+function _sheetsBadge(state){
+  const el=document.getElementById('sheets-sync-badge');if(!el||!SHEETS_API_URL)return;
+  if(state==='saving'){el.style.display='inline';el.style.background='#fff3cd';el.style.color='#856404';el.textContent='☁ Guardando…';}
+  else if(state==='ok'){el.style.display='inline';el.style.background='#e8f4ea';el.style.color='#2d6a4f';el.textContent='☁ Guardado';setTimeout(()=>{if(el)el.style.display='none';},4000);}
+  else if(state==='error'){el.style.display='inline';el.style.background='#ffe5e5';el.style.color='#c92a2a';el.textContent='☁ Error al guardar';setTimeout(()=>{if(el)el.style.display='none';},6000);}
+  else if(state==='loading'){el.style.display='inline';el.style.background='#e3effd';el.style.color='#0073ea';el.textContent='☁ Cargando…';}
+}
+function _buildSheetsPayload(){
+  return JSON.stringify({
+    platform: currentPlatform,
+    ts: new Date().toISOString(),
+    ba:{clients:ba_clients,meetings:ba_meetings,globalMtgs:ba_globalMtgs,actions:ba_actions,weeklyLog:ba_weeklyLog,statusLog:ba_statusLog,interactions:ba_interactions},
+    bs:{clients:bs_clients,meetings:bs_meetings,globalMtgs:bs_globalMtgs,actions:bs_actions,weeklyLog:bs_weeklyLog,statusLog:bs_statusLog,interactions:bs_interactions},
+    fxRate:fxRate
+  });
+}
+function _syncToSheets(){
+  if(!SHEETS_API_URL)return;
+  _sheetsBadge('saving');
+  const body=_buildSheetsPayload();
+  fetch(SHEETS_API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:body})
+    .then(()=>_sheetsBadge('ok'))
+    .catch(()=>_sheetsBadge('error'));
+}
+async function _loadFromSheets(){
+  if(!SHEETS_API_URL)return false;
+  try{
+    _sheetsBadge('loading');
+    const res=await fetch(SHEETS_API_URL+'?t='+Date.now());
+    if(!res.ok)throw new Error('http '+res.status);
+    const raw=await res.text();
+    if(!raw||raw==='{}'||raw.length<10)return false;
+    const d=JSON.parse(raw);
+    if(!d||!d.ba||!d.bs)return false;
+    // Restaurar datos BA
+    if(Array.isArray(d.ba.clients)&&d.ba.clients.length>0){ba_clients=d.ba.clients;localStorage.setItem('ba_baum_clients',JSON.stringify(ba_clients));}
+    if(d.ba.meetings){ba_meetings=d.ba.meetings;localStorage.setItem('ba_baum_meetings',JSON.stringify(ba_meetings));}
+    if(d.ba.globalMtgs){ba_globalMtgs=d.ba.globalMtgs;localStorage.setItem('ba_baum_gmtgs',JSON.stringify(ba_globalMtgs));}
+    if(d.ba.statusLog){ba_statusLog=d.ba.statusLog;localStorage.setItem('ba_baum_statuslog',JSON.stringify(ba_statusLog));}
+    if(d.ba.interactions){ba_interactions=d.ba.interactions;localStorage.setItem('ba_baum_interactions',JSON.stringify(ba_interactions));}
+    // Restaurar datos BS
+    if(Array.isArray(d.bs.clients)){bs_clients=d.bs.clients;localStorage.setItem('bs_baum_clients',JSON.stringify(bs_clients));}
+    if(d.bs.meetings){bs_meetings=d.bs.meetings;localStorage.setItem('bs_baum_meetings',JSON.stringify(bs_meetings));}
+    if(d.bs.globalMtgs){bs_globalMtgs=d.bs.globalMtgs;localStorage.setItem('bs_baum_gmtgs',JSON.stringify(bs_globalMtgs));}
+    if(d.bs.statusLog){bs_statusLog=d.bs.statusLog;localStorage.setItem('bs_baum_statuslog',JSON.stringify(bs_statusLog));}
+    if(d.bs.interactions){bs_interactions=d.bs.interactions;localStorage.setItem('bs_baum_interactions',JSON.stringify(bs_interactions));}
+    // Actualizar referencias activas
+    clients=currentPlatform==='baumapp'?ba_clients:bs_clients;
+    meetings=currentPlatform==='baumapp'?ba_meetings:bs_meetings;
+    globalMtgs=currentPlatform==='baumapp'?ba_globalMtgs:bs_globalMtgs;
+    statusLog=currentPlatform==='baumapp'?ba_statusLog:bs_statusLog;
+    interactions=currentPlatform==='baumapp'?ba_interactions:bs_interactions;
+    if(d.fxRate&&!isNaN(d.fxRate)){fxRate=Number(d.fxRate);localStorage.setItem('baum_fx',fxRate.toString());}
+    _sheetsBadge('ok');
+    return true;
+  }catch(e){console.warn('[Sheets] Error al cargar:',e);_sheetsBadge('error');return false;}
+}
+// ─────────────────────────────────────────────────────────────
 function loadAppUsers(){
   try{
     const stored=localStorage.getItem('baum_users_v3');
@@ -2136,7 +2205,20 @@ function renderWeeklySummary(){
 
 function renderVelocidad(){const vt=document.getElementById('velocity-tbody'),noD=document.getElementById('velocity-no-data'),kpis=document.getElementById('velocity-kpis');if(!vt||!kpis)return;const MS_W=604800000;const getStart=c=>{if(c.createdAt)return c.createdAt;const sl=statusLog[c.id]||[];return sl.length>0?sl.reduce((m,e)=>e.date<m?e.date:m,sl[0].date):null;};const getEnd=c=>{const sl=statusLog[c.id]||[];if(c.status==='Activo'){const e=[...sl].reverse().find(x=>x.status==='Activo');if(e)return{d:e.date,t:'won'};if(c.startDate)return{d:c.startDate+'T12:00:00',t:'won'};return{d:new Date().toISOString(),t:'open'};}if(c.status==='Perdido')return{d:c.lossDate||new Date().toISOString(),t:'lost'};return{d:new Date().toISOString(),t:'open'};};const proc=clients.map(c=>{const s=getStart(c),end=getEnd(c);if(!s)return{c,ok:false};const w=Math.max(0,(new Date(end.d)-new Date(s))/MS_W);return{c,ok:true,start:s,end:end.d,weeks:w,et:end.t,sc:(statusLog[c.id]||[]).length};});const withD=proc.filter(x=>x.ok).sort((a,b)=>{const ord={won:0,lost:1,open:2};return (ord[a.et]||0)-(ord[b.et]||0)||a.weeks-b.weeks;});const noL=proc.filter(x=>!x.ok);const won=withD.filter(x=>x.et==='won'),lost=withD.filter(x=>x.et==='lost'),open=withD.filter(x=>x.et==='open');const avg=arr=>arr.length?(arr.reduce((s,x)=>s+x.weeks,0)/arr.length).toFixed(1):'—';kpis.innerHTML='<div class="kpi-card"><div class="kpi-label">⌀ Semanas para cerrar</div><div class="kpi-value" style="color:#2d6a4f">'+avg(won)+'</div><div class="kpi-sub">'+won.length+' cliente'+(won.length!==1?'s':'')+' cerrado'+(won.length!==1?'s':'')+'</div></div><div class="kpi-card"><div class="kpi-label">⌀ Semanas para perder</div><div class="kpi-value" style="color:#e44258">'+avg(lost)+'</div><div class="kpi-sub">'+lost.length+' perdido'+(lost.length!==1?'s':'')+'</div></div><div class="kpi-card"><div class="kpi-label">En pipeline activo</div><div class="kpi-value" style="color:#fdab3d">'+open.length+'</div><div class="kpi-sub">Prom. '+avg(open)+' sem. en curso</div></div><div class="kpi-card"><div class="kpi-label">Sin historial</div><div class="kpi-value" style="color:var(--text-gray)">'+noL.length+'</div><div class="kpi-sub">Clientes previos al registro</div></div>';const SCOL={Prospecto:'#7fb3d3',Contactado:'#5a9bb5',Propuesta:'#4a9d8f',Piloto:'#40916c',Contrato:'#2d6a4f',Activo:'#1b4332',Perdido:'#e44258'};const TCOL={won:'#2d6a4f',lost:'#e44258',open:'#fdab3d'};const TLBL={won:'✓ Cerrado',lost:'✗ Perdido',open:'⏱ En curso'};const fD=iso=>{try{return new Date(iso).toLocaleDateString('es-CL',{day:'2-digit',month:'short',year:'2-digit'})}catch(e){return'—'}};const mxW=withD.length?Math.max(...withD.map(x=>x.weeks),1):1;vt.innerHTML=withD.map(x=>{const pct=Math.min((x.weeks/mxW)*100,100),col=TCOL[x.et],sc=SCOL[x.c.status]||'#999';return'<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 10px"><strong>'+x.c.name+'</strong></td><td style="padding:8px 10px"><span style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;background:'+sc+';color:white">'+x.c.status+'</span></td><td style="padding:8px 10px;text-align:center;color:var(--text-gray);font-size:11px">'+fD(x.start)+'</td><td style="padding:8px 10px;text-align:center"><div style="display:flex;align-items:center;gap:6px;justify-content:center"><div style="width:56px;height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+col+';border-radius:3px"></div></div><span style="font-weight:700;font-size:13px;color:'+col+'">'+x.weeks.toFixed(1)+'w</span></div></td><td style="padding:8px 10px;text-align:center;color:var(--text-gray);font-size:11px">'+x.sc+' cambio'+(x.sc!==1?'s':'')+'</td><td style="padding:8px 10px;font-weight:600;color:'+col+'">'+TLBL[x.et]+'</td></tr>';}).join('');if(withD.length===0){noD.style.display='block';noD.textContent='Aún no hay clientes con historial de ciclo. Los que crees a partir de ahora quedarán registrados automáticamente.';}else noD.style.display='none';destroyChart('velocity-dist-chart');if(won.length>0){const bins=[0,4,8,12,20,36,100],lbls=['<4w','4–8w','8–12w','12–20w','20–36w','36w+'];charts['velocity-dist-chart']=new Chart(document.getElementById('velocity-dist-chart'),{type:'bar',data:{labels:lbls,datasets:[{label:'Clientes cerrados',data:lbls.map((_,i)=>won.filter(x=>x.weeks>=bins[i]&&x.weeks<bins[i+1]).length),backgroundColor:'#40916c',borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1}}}}});}destroyChart('velocity-stage-chart');const CS=currentPlatform==='baumapp'?STAGES:BS_STAGES;const stT=CS.map(s=>{const durs=[];clients.forEach(c=>{const sl=statusLog[c.id]||[];for(let i=0;i<sl.length;i++){if(sl[i].status===s.id){const nx=sl[i+1],ed=nx?new Date(nx.date):(c.status===s.id?new Date():null);if(ed){const w=(ed-new Date(sl[i].date))/MS_W;if(w>=0&&w<200)durs.push(w);}break;}}});return{label:s.label,avg:durs.length?(durs.reduce((a,b)=>a+b,0)/durs.length):null,color:s.color};}).filter(x=>x.avg!==null);if(stT.length>0){charts['velocity-stage-chart']=new Chart(document.getElementById('velocity-stage-chart'),{type:'bar',data:{labels:stT.map(x=>x.label),datasets:[{label:'Semanas prom. en etapa',data:stT.map(x=>parseFloat(x.avg.toFixed(1))),backgroundColor:stT.map(x=>x.color),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'Semanas'}}}}});}}
 function injectIcons(){const map={'nav-ico-dash':ICO.dash,'nav-ico-pipe':ICO.pipeline,'nav-ico-cli':ICO.clients,'nav-ico-tar':ICO.tariff,'nav-ico-cal':ICO.calendar,'nav-ico-chart':ICO.chart,'nav-ico-usr':ICO.users,'nav-ico-vel':ICO.clock,'ico-ba':ICO.app,'ico-bs':ICO.leaf,'ico-csv':ICO.csv,'ico-warn-dash':ICO.warn,'ico-warn-2':ICO.warn,'ico-agendar':ICO.calendar,'ico-int-phone':ICO.phone,'ico-int-email':ICO.email,'ico-int-meet':ICO.meet,'ico-int-note':ICO.note};Object.keys(map).forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=map[id]})}
-function init(){document.getElementById('fx-rate').value=fxRate;updateSidebarForPlatform();renderDashboard();injectIcons();autoFetchFX()}
+function init(){
+  document.getElementById('fx-rate').value=fxRate;
+  updateSidebarForPlatform();
+  renderDashboard();
+  injectIcons();
+  autoFetchFX();
+  // Intentar cargar desde Google Sheets (si está configurado).
+  // Si hay datos más recientes en Sheets, los carga y re-renderiza.
+  if(SHEETS_API_URL){
+    _loadFromSheets().then(loaded=>{
+      if(loaded){renderDashboard();if(typeof renderPipeline==='function')renderPipeline();}
+    });
+  }
+}
 function render(){renderDashboard();renderPipeline();renderClients()}
 checkAuth();
 injectIcons();
