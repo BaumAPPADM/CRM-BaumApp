@@ -122,61 +122,55 @@
     .sidebar-section-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1.5px;padding:16px 16px 6px;text-transform:uppercase}
     @media(max-width:1200px){.pipeline-columns{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}}
     @media(max-width:768px){
-      /* Layout principal */
       .app{flex-direction:column}
       .sidebar{display:none!important}
-      .view{padding-bottom:80px!important}
-      /* Bottom nav bar */
-      #mobile-nav{display:flex!important}
-      /* Topbar */
-      .topbar{padding:10px 14px;gap:8px}
+      .view{padding-top:0}
+      .topbar{padding:10px 14px;gap:8px;background:var(--sidebar-bg);color:#fff}
       .topbar-search{display:none}
       .topbar-left{gap:10px}
-      /* KPIs */
+      #mobile-hamburger{display:flex!important}
+      .topbar-badge{background:rgba(255,255,255,.2)}
       .kpi-grid{grid-template-columns:repeat(2,1fr);gap:10px}
       .kpi-value{font-size:20px}
-      /* Cards y grids */
       .grid-2{grid-template-columns:1fr}
       .card{padding:14px;border-radius:10px}
       .card-title{font-size:14px}
-      /* Pipeline horizontal scroll */
       .pipeline-columns{display:flex;flex-direction:column;gap:12px}
       .pipeline-col{min-width:unset;width:100%}
-      /* Tabla scroll */
       .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
       table{min-width:500px;font-size:12px}
-      /* Modal full screen */
       .modal-content{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;border-radius:0;margin:0}
       .modal-header{padding:14px 16px}
       .modal-body{padding:14px 16px;overflow-y:auto}
-      /* Sección content */
-      .content{padding:14px}
-      /* Botones más grandes para touch */
       .btn{padding:9px 14px;font-size:13px}
-      /* Ocultar tooltips en mobile */
       [data-tip]:hover::after,[data-tip]:hover::before{display:none}
     }
-    /* Bottom navigation bar (solo mobile) */
-    #mobile-nav{
-      display:none;
-      position:fixed;bottom:0;left:0;right:0;
-      background:var(--sidebar-bg);
-      z-index:1000;
-      height:62px;
-      padding-bottom:env(safe-area-inset-bottom,0);
-      border-top:1px solid rgba(255,255,255,.1);
-      justify-content:space-around;
-      align-items:center;
+    /* Botón hamburguesa (solo mobile) */
+    #mobile-hamburger{
+      display:none;background:none;border:none;color:#fff;
+      cursor:pointer;font-size:22px;padding:4px;align-items:center;
+      margin-right:4px;flex-shrink:0;
     }
-    #mobile-nav .mnav-btn{
-      display:flex;flex-direction:column;align-items:center;gap:3px;
-      color:rgba(255,255,255,.55);font-size:9px;font-weight:700;
-      background:none;border:none;cursor:pointer;padding:6px 8px;
-      letter-spacing:.5px;text-transform:uppercase;min-width:52px;
-      transition:color .15s;
+    /* Drawer overlay */
+    #mobile-drawer-overlay{
+      display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1100;
     }
-    #mobile-nav .mnav-btn.active{color:#fff}
-    #mobile-nav .mnav-btn svg{width:20px;height:20px}
+    #mobile-drawer-overlay.open{display:block}
+    /* Drawer */
+    #mobile-drawer{
+      position:fixed;top:0;left:-260px;width:260px;height:100%;
+      background:var(--sidebar-bg);z-index:1101;
+      transition:left .25s ease;display:flex;flex-direction:column;
+      overflow-y:auto;
+    }
+    #mobile-drawer.open{left:0}
+    #mobile-drawer .drawer-header{padding:24px 16px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+    #mobile-drawer .drawer-logo{font-size:18px;font-weight:800;color:#fff}
+    #mobile-drawer .drawer-sub{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-top:2px}
+    #mobile-drawer .drawer-section{font-size:9px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:1.5px;padding:16px 16px 6px;text-transform:uppercase}
+    #mobile-drawer .drawer-item{display:flex;align-items:center;gap:10px;padding:13px 16px;color:#fff;font-size:14px;cursor:pointer;border:none;background:none;width:100%;text-align:left;font-family:inherit;font-weight:500;transition:background .15s}
+    #mobile-drawer .drawer-item:hover{background:rgba(255,255,255,.08)}
+    #mobile-drawer .drawer-item.active{background:rgba(255,255,255,.15)}
     [data-tip]{position:relative;cursor:help}[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#323338;color:#fff;padding:7px 11px;border-radius:7px;font-size:11px;line-height:1.5;white-space:normal;max-width:240px;text-align:left;z-index:9999;pointer-events:none;box-shadow:0 3px 12px rgba(0,0,0,.22);font-weight:400;font-family:'Nunito',sans-serif}[data-tip]:hover::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#323338;z-index:9999;pointer-events:none}
   </style>
   </head>
@@ -229,6 +223,7 @@
     </div>
     <div class="content">
       <div class="topbar">
+        <button id="mobile-hamburger" onclick="toggleMobileDrawer()" aria-label="Menú">&#9776;</button>
         <div class="topbar-left">
           <input type="text" class="topbar-search" id="global-search" placeholder="Buscar clientes, reuniones...">
           <input type="number" id="fx-rate" min="1" placeholder="USD/CLP" oninput="updateFX()" style="width:100px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:13px;">
@@ -2329,6 +2324,50 @@ function renderDealCardNextAction(client){if(!client.nextAction||!client.nextAct
 function renderPendingActions(){const container=document.getElementById('pending-actions-list');const today=new Date().toISOString().split('T')[0];const pending=[];clients.forEach(client=>{if(client.nextAction&&client.nextAction.date){pending.push({...client,actionDate:client.nextAction.date});}});pending.sort((a,b)=>a.actionDate.localeCompare(b.actionDate));container.innerHTML=pending.length===0?'<div style="text-align:center;color:var(--text-gray);padding:16px">Sin acciones pendientes</div>':'';pending.forEach(client=>{const status=getNextActionStatus(client.actionDate);const color=getNextActionColor(status);const icon=status==='red'?ICO.dot_red:status==='orange'?ICO.dot_orange:ICO.dot_gray;const el=document.createElement('div');el.style.cssText='padding:10px;background:#f9fafc;border-radius:6px;border-left:4px solid '+color+';cursor:pointer';el.innerHTML=`<div style="font-weight:600;font-size:12px">${client.name}</div><div style="font-size:11px;color:${color};margin-top:4px"><span>${icon}</span> ${client.nextAction.text} • ${client.actionDate}</div>`;el.onclick=()=>openEditModal(client.id);container.appendChild(el);});}
 function renderInactiveClients(){const container=document.getElementById('inactive-clients-list');const sevenDaysAgo=new Date();sevenDaysAgo.setDate(sevenDaysAgo.getDate()-7);const cutoffDate=sevenDaysAgo.toISOString().split('T')[0];const inactive=[];clients.forEach(client=>{if(client.status==='Activo'||client.status==='Perdido')return;const clientInteractions=interactions[client.id]||[];const hasRecentActivity=clientInteractions.some(i=>i.date>=cutoffDate);const hasNextAction=client.nextAction&&client.nextAction.date;if(!hasRecentActivity&&!hasNextAction){const daysSinceActivity=clientInteractions.length>0?Math.floor((new Date()-new Date(clientInteractions[clientInteractions.length-1].date))/86400000):9999;inactive.push({...client,daysSince:daysSinceActivity});}});inactive.sort((a,b)=>b.daysSince-a.daysSince);container.innerHTML=inactive.length===0?'<div style="text-align:center;color:var(--text-gray);padding:16px">Todos los clientes activos tienen seguimiento</div>':'';inactive.forEach(client=>{const el=document.createElement('div');el.style.cssText='padding:10px;background:#fff3e0;border-radius:6px;border-left:4px solid #fdab3d;cursor:pointer';el.innerHTML=`<div style="font-weight:600;font-size:12px">${client.name}</div><div style="font-size:11px;color:#b8860b;margin-top:4px">${ICO.pin} ${client.country} • ${client.status} <br>${ICO.warn} ${client.daysSince===9999?'Sin interacciones':client.daysSince+' días sin actividad'}</div>`;el.onclick=()=>openEditModal(client.id);container.appendChild(el);});};
   </script>
+
+<!-- Drawer menú móvil -->
+<div id="mobile-drawer-overlay" onclick="toggleMobileDrawer()"></div>
+<div id="mobile-drawer">
+  <div class="drawer-header">
+    <div class="drawer-logo">BaumApp</div>
+    <div class="drawer-sub">PIPELINE CRM</div>
+  </div>
+  <div class="drawer-section">BaumApp</div>
+  <button class="drawer-item active" id="di-dashboard" onclick="mobileGoTo('dashboard','di-dashboard')">&#9632; Dashboard Ha</button>
+  <button class="drawer-item" id="di-pipeline" onclick="mobileGoTo('pipeline','di-pipeline')">&#9632; Pipeline</button>
+  <button class="drawer-item" id="di-clientes" onclick="mobileGoTo('clientes','di-clientes')">&#9632; Clientes</button>
+  <button class="drawer-item" id="di-reuniones" onclick="mobileGoTo('reuniones','di-reuniones')">&#9632; Reuniones</button>
+  <button class="drawer-item" id="di-tarifario" onclick="mobileGoTo('tarifario','di-tarifario')">&#9632; Tarifario</button>
+  <div class="drawer-section">Análisis</div>
+  <button class="drawer-item" id="di-analisis" onclick="mobileGoTo('analisis','di-analisis')">&#9632; Análisis Global</button>
+  <button class="drawer-item" id="di-velocidad" onclick="mobileGoTo('velocidad','di-velocidad')">&#9632; Ciclo de Ventas</button>
+  <div class="drawer-section">Admin</div>
+  <button class="drawer-item" id="di-usuarios" onclick="mobileGoTo('usuarios','di-usuarios')">&#9632; Usuarios</button>
+</div>
+<script>
+function toggleMobileDrawer(){
+  document.getElementById('mobile-drawer').classList.toggle('open');
+  document.getElementById('mobile-drawer-overlay').classList.toggle('open');
+}
+function mobileGoTo(view, activeId){
+  document.querySelectorAll('#mobile-drawer .drawer-item').forEach(b=>b.classList.remove('active'));
+  const el=document.getElementById(activeId);
+  if(el) el.classList.add('active');
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  const vEl=document.getElementById('view-'+view);
+  if(vEl) vEl.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  if(view==='dashboard') renderDashboard();
+  else if(view==='pipeline') renderPipeline();
+  else if(view==='clientes') renderClients();
+  else if(view==='analisis') renderAnalisis();
+  else if(view==='reuniones') renderReuniones();
+  else if(view==='tarifario') renderTarifario();
+  else if(view==='velocidad') renderVelocidad();
+  else if(view==='usuarios') renderUsersView();
+  toggleMobileDrawer();
+}
+</script>
 
 <!-- Barra de navegación inferior (solo móvil) -->
 <nav id="mobile-nav">
