@@ -888,9 +888,9 @@ function _saveToFirebase(doc){
 async function _loadFromFirebase(){
   try{
     const [baSnap,bsSnap,settSnap]=await Promise.all([
-      db.collection('crm').doc('ba').get(),
-      db.collection('crm').doc('bs').get(),
-      db.collection('crm').doc('settings').get()
+      db.collection('crm').doc('ba').get({source:'server'}),
+      db.collection('crm').doc('bs').get({source:'server'}),
+      db.collection('crm').doc('settings').get({source:'server'})
     ]);
     if(baSnap.exists){const d=baSnap.data();
       if(d.clients&&d.clients.length>0)ba_clients=d.clients;
