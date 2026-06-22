@@ -647,6 +647,7 @@
 const FIREBASE_CONFIG={apiKey:"AIzaSyB4fNbtTwQo4PtVDh35R33A6lZSOz3rvu4",authDomain:"baumsystem-crm-dc27e.firebaseapp.com",projectId:"baumsystem-crm-dc27e",storageBucket:"baumsystem-crm-dc27e.firebasestorage.app",messagingSenderId:"477326410630",appId:"1:477326410630:web:afefbe8dfab289bd1d2207"};
 firebase.initializeApp(FIREBASE_CONFIG);
 const db=firebase.firestore();
+let _firebaseReady=false; // bloquea saves hasta que la carga inicial termine
 // ────────────────────────────────────────────────────────────
 // Minimalist SVG icons
 const ICO={
@@ -872,6 +873,7 @@ function _fbBadge(ok){
   else{el.style.background='#ffe5e5';el.style.color='#c92a2a';el.textContent='☁ Error al guardar';setTimeout(()=>el.style.display='none',5000);}
 }
 function _saveToFirebase(doc){
+  if(!_firebaseReady){return;} // evita sobrescribir Firebase antes de cargar datos
   try{
     const ts=new Date().toISOString();
     if(doc==='ba'){
@@ -2248,6 +2250,7 @@ async function migrateToFirebase(){
 (async function(){
   try{ await _loadFromFirebase(); }
   catch(e){ console.warn('Firebase init error:', e); }
+  _firebaseReady=true; // a partir de aquí los saves a Firebase están permitidos
   document.getElementById('fb-loading').style.display='none';
   checkAuth();
   injectIcons();
