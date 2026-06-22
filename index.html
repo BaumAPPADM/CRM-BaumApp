@@ -2333,16 +2333,16 @@ function renderInactiveClients(){const container=document.getElementById('inacti
     <div class="drawer-sub">PIPELINE CRM</div>
   </div>
   <div class="drawer-section">BaumApp</div>
-  <button class="drawer-item active" id="di-dashboard" onclick="mobileGoTo('dashboard','di-dashboard')">&#9632; Dashboard Ha</button>
-  <button class="drawer-item" id="di-pipeline" onclick="mobileGoTo('pipeline','di-pipeline')">&#9632; Pipeline</button>
-  <button class="drawer-item" id="di-clientes" onclick="mobileGoTo('clientes','di-clientes')">&#9632; Clientes</button>
-  <button class="drawer-item" id="di-reuniones" onclick="mobileGoTo('reuniones','di-reuniones')">&#9632; Reuniones</button>
-  <button class="drawer-item" id="di-tarifario" onclick="mobileGoTo('tarifario','di-tarifario')">&#9632; Tarifario</button>
+  <button class="drawer-item active" id="di-dashboard" onclick="mobileGoTo('dashboard','di-dashboard')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg> Dashboard</button>
+  <button class="drawer-item" id="di-pipeline" onclick="mobileGoTo('pipeline','di-pipeline')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Pipeline</button>
+  <button class="drawer-item" id="di-clientes" onclick="mobileGoTo('clientes','di-clientes')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Clientes</button>
+  <button class="drawer-item" id="di-reuniones" onclick="mobileGoTo('reuniones','di-reuniones')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Reuniones</button>
+  <button class="drawer-item" id="di-tarifario" onclick="mobileGoTo('tarifario','di-tarifario')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Tarifario</button>
   <div class="drawer-section">Análisis</div>
-  <button class="drawer-item" id="di-analisis" onclick="mobileGoTo('analisis','di-analisis')">&#9632; Análisis Global</button>
-  <button class="drawer-item" id="di-velocidad" onclick="mobileGoTo('velocidad','di-velocidad')">&#9632; Ciclo de Ventas</button>
+  <button class="drawer-item" id="di-analisis" onclick="mobileGoTo('analisis','di-analisis')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Análisis Global</button>
+  <button class="drawer-item" id="di-velocidad" onclick="mobileGoTo('velocidad','di-velocidad')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Ciclo de Ventas</button>
   <div class="drawer-section">Admin</div>
-  <button class="drawer-item" id="di-usuarios" onclick="mobileGoTo('usuarios','di-usuarios')">&#9632; Usuarios</button>
+  <button class="drawer-item" id="di-usuarios" onclick="mobileGoTo('usuarios','di-usuarios')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg> Usuarios</button>
 </div>
 <script>
 function toggleMobileDrawer(){
@@ -2369,45 +2369,5 @@ function mobileGoTo(view, activeId){
 }
 </script>
 
-<!-- Barra de navegación inferior (solo móvil) -->
-<nav id="mobile-nav">
-  <button class="mnav-btn active" onclick="mobileNav('dashboard',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-    Inicio
-  </button>
-  <button class="mnav-btn" onclick="mobileNav('pipeline',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-    Pipeline
-  </button>
-  <button class="mnav-btn" onclick="mobileNav('clientes',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-    Clientes
-  </button>
-  <button class="mnav-btn" onclick="mobileNav('analisis',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-    Análisis
-  </button>
-  <button class="mnav-btn" onclick="mobileNav('reuniones',this)">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-    Reuniones
-  </button>
-</nav>
-<script>
-function mobileNav(view, btn){
-  document.querySelectorAll('#mobile-nav .mnav-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  // Simular click en el nav-item del sidebar
-  const viewMap={dashboard:'dashboard',pipeline:'pipeline',clientes:'clientes',analisis:'analisis',reuniones:'reuniones'};
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  const el=document.getElementById('view-'+view);
-  if(el)el.classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
-  if(view==='dashboard')renderDashboard();
-  else if(view==='pipeline')renderPipeline();
-  else if(view==='clientes')renderClients();
-  else if(view==='analisis')renderAnalisis();
-  else if(view==='reuniones')renderReuniones();
-}
-</script>
 </body>
 </html>
