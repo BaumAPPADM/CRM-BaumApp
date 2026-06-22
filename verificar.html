@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificar Firebase</title>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <style>
+    body{font-family:sans-serif;max-width:600px;margin:60px auto;padding:20px;background:#f5f5f5}
+    .btn{background:#1b4332;color:white;border:none;padding:14px 28px;border-radius:8px;font-size:16px;cursor:pointer}
+    #log{margin-top:20px;background:white;border-radius:8px;padding:16px;font-size:14px;line-height:2;border:1px solid #ddd}
+    .ok{color:#2d6a4f;font-weight:700} .err{color:#e44258;font-weight:700}
+  </style>
+</head>
+<body>
+  <h2>🔍 ¿Qué hay en Firebase?</h2>
+  <button class="btn" onclick="check()">Verificar ahora</button>
+  <div id="log">Esperando…</div>
+  <script>
+    firebase.initializeApp({apiKey:"AIzaSyB4fNbtTwQo4PtVDh35R33A6lZSOz3rvu4",authDomain:"baumsystem-crm-dc27e.firebaseapp.com",projectId:"baumsystem-crm-dc27e",storageBucket:"baumsystem-crm-dc27e.firebasestorage.app",messagingSenderId:"477326410630",appId:"1:477326410630:web:afefbe8dfab289bd1d2207"});
+    const db = firebase.firestore();
+    async function check(){
+      document.getElementById('log').innerHTML = 'Leyendo Firebase…';
+      try{
+        const ba = await db.collection('crm').doc('ba').get();
+        const bs = await db.collection('crm').doc('bs').get();
+        let html = '';
+        if(ba.exists){
+          const d = ba.data();
+          const ha = (d.clients||[]).reduce((s,c)=>s+(parseFloat(c.hectaresPotential||c.hectares)||0),0);
+          html += `<div class="ok">✅ BaumApp: ${(d.clients||[]).length} clientes · ${ha.toLocaleString('es-CL',{maximumFractionDigits:1})} ha potencial</div>`;
+          html += `<div>Última actualización: ${d.updatedAt||'desconocida'}</div>`;
+        } else {
+          html += `<div class="err">❌ BaumApp: sin datos en Firebase</div>`;
+        }
+        if(bs.exists){
+          const d = bs.data();
+          const ha = (d.clients||[]).reduce((s,c)=>s+(parseFloat(c.hectaresPotential||c.hectares)||0),0);
+          html += `<div class="ok">✅ BaumSystem: ${(d.clients||[]).length} clientes · ${ha.toLocaleString('es-CL',{maximumFractionDigits:1})} ha potencial</div>`;
+        } else {
+          html += `<div class="err">❌ BaumSystem: sin datos en Firebase</div>`;
+        }
+        document.getElementById('log').innerHTML = html;
+      }catch(e){
+        document.getElementById('log').innerHTML = `<div class="err">❌ Error: ${e.message}</div>`;
+      }
+    }
+  </script>
+</body>
+</html>
