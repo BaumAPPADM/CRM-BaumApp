@@ -121,56 +121,23 @@
     .nav-ico{display:inline-flex;align-items:center;vertical-align:middle}
     .sidebar-section-label{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);letter-spacing:1.5px;padding:16px 16px 6px;text-transform:uppercase}
     @media(max-width:1200px){.pipeline-columns{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}}
+    @media(max-width:768px){.sidebar{width:60px;padding:10px 0}.sidebar-header{display:none}.topbar{padding:12px 16px}.modal-content{width:95vw;max-height:95vh}.grid-2{grid-template-columns:1fr}}
+    /* === TARJETAS MOBILE CLIENTES === */
+    .clients-mobile-cards{display:none;flex-direction:column;gap:12px;padding:4px 0}
+    .client-card-mobile{background:white;border-radius:12px;border:1px solid var(--border);box-shadow:var(--shadow);padding:16px;cursor:pointer;transition:box-shadow .2s,transform .2s;border-left:4px solid var(--primary)}
+    .client-card-mobile:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
+    .ccm-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+    .ccm-name{font-size:15px;font-weight:700;color:var(--text-dark);flex:1;margin-right:8px}
+    .ccm-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+    .ccm-field{display:flex;flex-direction:column;gap:2px}
+    .ccm-label{font-size:10px;font-weight:700;color:var(--text-gray);text-transform:uppercase;letter-spacing:.4px}
+    .ccm-value{font-size:13px;font-weight:600;color:var(--text-dark)}
+    .ccm-footer{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid #f0f0f0;font-size:11px;color:var(--text-gray)}
     @media(max-width:768px){
-      .app{flex-direction:column}
-      .sidebar{display:none!important}
-      .view{padding-top:0}
-      .topbar{padding:10px 14px;gap:8px;background:var(--sidebar-bg);color:#fff}
-      .topbar-search{display:none}
-      .topbar-left{gap:10px}
-      #mobile-hamburger{display:flex!important}
-      .topbar-badge{background:rgba(255,255,255,.2)}
-      .kpi-grid{grid-template-columns:repeat(2,1fr);gap:10px}
-      .kpi-value{font-size:20px}
-      .grid-2{grid-template-columns:1fr}
-      .card{padding:14px;border-radius:10px}
-      .card-title{font-size:14px}
-      .pipeline-columns{display:flex;flex-direction:column;gap:12px}
-      .pipeline-col{min-width:unset;width:100%}
-      .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-      table{min-width:500px;font-size:12px}
-      .modal-content{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;border-radius:0;margin:0}
-      .modal-header{padding:14px 16px}
-      .modal-body{padding:14px 16px;overflow-y:auto}
-      .btn{padding:9px 14px;font-size:13px}
-      [data-tip]:hover::after,[data-tip]:hover::before{display:none}
+      .clients-table-wrap{display:none}
+      .clients-mobile-cards{display:flex}
+      .topbar-search{max-width:160px}
     }
-    /* Botón hamburguesa (solo mobile) */
-    #mobile-hamburger{
-      display:none;background:none;border:none;color:#fff;
-      cursor:pointer;font-size:22px;padding:4px;align-items:center;
-      margin-right:4px;flex-shrink:0;
-    }
-    /* Drawer overlay */
-    #mobile-drawer-overlay{
-      display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1100;
-    }
-    #mobile-drawer-overlay.open{display:block}
-    /* Drawer */
-    #mobile-drawer{
-      position:fixed;top:0;left:-260px;width:260px;height:100%;
-      background:var(--sidebar-bg);z-index:1101;
-      transition:left .25s ease;display:flex;flex-direction:column;
-      overflow-y:auto;
-    }
-    #mobile-drawer.open{left:0}
-    #mobile-drawer .drawer-header{padding:24px 16px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
-    #mobile-drawer .drawer-logo{font-size:18px;font-weight:800;color:#fff}
-    #mobile-drawer .drawer-sub{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:1px;margin-top:2px}
-    #mobile-drawer .drawer-section{font-size:9px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:1.5px;padding:16px 16px 6px;text-transform:uppercase}
-    #mobile-drawer .drawer-item{display:flex;align-items:center;gap:10px;padding:13px 16px;color:#fff;font-size:14px;cursor:pointer;border:none;background:none;width:100%;text-align:left;font-family:inherit;font-weight:500;transition:background .15s}
-    #mobile-drawer .drawer-item:hover{background:rgba(255,255,255,.08)}
-    #mobile-drawer .drawer-item.active{background:rgba(255,255,255,.15)}
     [data-tip]{position:relative;cursor:help}[data-tip]:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#323338;color:#fff;padding:7px 11px;border-radius:7px;font-size:11px;line-height:1.5;white-space:normal;max-width:240px;text-align:left;z-index:9999;pointer-events:none;box-shadow:0 3px 12px rgba(0,0,0,.22);font-weight:400;font-family:'Nunito',sans-serif}[data-tip]:hover::before{content:'';position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#323338;z-index:9999;pointer-events:none}
   </style>
   </head>
@@ -216,14 +183,14 @@
         <button class="nav-item" onclick="showView('usuarios')"><span class="nav-ico" id="nav-ico-usr"></span> Usuarios</button>
       </div>
       <div class="sidebar-footer">
-        <div style="font-size:10px;color:rgba(255,255,255,.3);padding:0 16px 8px">v2.2 · BaumApp Pipeline</div>
-        <button class="logout-btn" onclick="migrateToFirebase()" style="margin-bottom:6px;background:#0073ea;border-color:#0073ea">☁ Migrar datos a Firebase</button>
+        <div style="font-size:10px;color:rgba(255,255,255,.3);padding:0 16px 8px">v2.3 · BaumApp Pipeline</div>
+        <input type="file" id="import-backup-input" accept=".json" style="display:none" onchange="importarBackup(event)">
+        <button class="logout-btn" style="margin-bottom:6px" onclick="document.getElementById('import-backup-input').click()">⬆ Importar respaldo</button>
         <button class="logout-btn" onclick="doLogout()">Cerrar sesión</button>
       </div>
     </div>
     <div class="content">
       <div class="topbar">
-        <button id="mobile-hamburger" onclick="toggleMobileDrawer()" aria-label="Menú">&#9776;</button>
         <div class="topbar-left">
           <input type="text" class="topbar-search" id="global-search" placeholder="Buscar clientes, reuniones...">
           <input type="number" id="fx-rate" min="1" placeholder="USD/CLP" oninput="updateFX()" style="width:100px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:13px;">
@@ -231,6 +198,7 @@
           <span id="fx-status" style="font-size:9px;color:var(--text-gray);display:none"></span>
         </div>
         <div class="topbar-right">
+          <span id="sheets-sync-badge" title="Sincronización con Google Sheets" style="display:none;font-size:11px;font-weight:600;padding:4px 10px;border-radius:12px;background:#e8f4ea;color:#2d6a4f;cursor:default">☁ Guardado</span>
           <span class="topbar-badge" id="user-badge">Usuario</span>
           <button class="btn btn-secondary" onclick="exportContextual()"><span class="nav-ico" id="ico-csv"></span> CSV</button>
           <button class="btn" onclick="openNewClientModal()">+ Cliente</button>
@@ -442,10 +410,11 @@
           <button class="filter-btn" onclick="filterClients('Perdido',this)">Perdidos</button>
           <input type="text" id="search-input" placeholder="Buscar cliente..." style="padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:13px;flex:1;max-width:300px;" oninput="searchClients(this.value)">
         </div>
-        <div class="card" style="padding:0;overflow-x:auto;flex:1">
+        <div class="card clients-table-wrap" style="padding:0;overflow-x:auto;flex:1">
           <table><thead><tr><th>Cliente</th><th>País</th><th>Ha Cerradas</th><th>Ha Potencial</th><th>USD/ha/año</th><th>Fact. Mensual</th><th>Tipo</th><th>Estado</th><th>Email</th><th>Teléfono</th><th></th></tr></thead><tbody id="clients-tbody"></tbody></table>
           <div id="clients-empty" class="empty-state" style="display:none">No hay clientes con ese filtro.</div>
         </div>
+        <div id="clients-cards" class="clients-mobile-cards"></div>
       </div>
       <div id="view-tarifario" class="view">
         <div class="card" style="margin-bottom:20px">
@@ -693,11 +662,17 @@
   </div>
   <script>
 
-// ─── FIREBASE ───────────────────────────────────────────────
-const FIREBASE_CONFIG={apiKey:"AIzaSyB4fNbtTwQo4PtVDh35R33A6lZSOz3rvu4",authDomain:"baumsystem-crm-dc27e.firebaseapp.com",projectId:"baumsystem-crm-dc27e",storageBucket:"baumsystem-crm-dc27e.firebasestorage.app",messagingSenderId:"477326410630",appId:"1:477326410630:web:afefbe8dfab289bd1d2207"};
+// ─── FIREBASE CONFIG ────────────────────────────────────────
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyB4fNbtTwQo4PtVDh35R33A6lZSOz3rvu4",
+  authDomain: "baumsystem-crm-dc27e.firebaseapp.com",
+  projectId: "baumsystem-crm-dc27e",
+  storageBucket: "baumsystem-crm-dc27e.firebasestorage.app",
+  messagingSenderId: "477326410630",
+  appId: "1:477326410630:web:afefbe8dfab289bd1d2207"
+};
 firebase.initializeApp(FIREBASE_CONFIG);
-const db=firebase.firestore();
-let _firebaseReady=false; // bloquea saves hasta que la carga inicial termine
+const db = firebase.firestore();
 // ────────────────────────────────────────────────────────────
 // Minimalist SVG icons
 const ICO={
@@ -726,6 +701,12 @@ const ICO={
   dot_gray:'<svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#ccc"/></svg>',
   clock:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
 };
+
+// ─── GOOGLE SHEETS SYNC ──────────────────────────────────────
+// Pega aquí la URL de tu Apps Script Web App después de desplegarlo.
+// Ejemplo: 'https://script.google.com/macros/s/XXXXXX/exec'
+const SHEETS_API_URL = 'https://script.google.com/macros/s/AKfycbxUY4oltARl63lZsyRhQbH1w2Aj-N6UuKlOGJ9vV9R4z2VoCGwL-ddrJZ-RxbRoxttpnQ/exec';
+// ─────────────────────────────────────────────────────────────
 
 // Platform system variables
 let currentPlatform = sessionStorage.getItem('baum_platform') || 'baumapp';
@@ -914,57 +895,77 @@ function persistBS() {
   localStorage.setItem('bs_baum_interactions', JSON.stringify(bs_interactions));
   _saveToFirebase('bs');
 }
-
-// ─── FIREBASE SAVE / LOAD ────────────────────────────────────
-function _fbBadge(ok){
-  const el=document.getElementById('fb-badge');if(!el)return;
-  el.style.display='inline';
-  if(ok){el.style.background='#e8f4ea';el.style.color='#2d6a4f';el.textContent='☁ Guardado';setTimeout(()=>el.style.display='none',3000);}
-  else{el.style.background='#ffe5e5';el.style.color='#c92a2a';el.textContent='☁ Error al guardar';setTimeout(()=>el.style.display='none',5000);}
+// ─── FIREBASE SYNC ──────────────────────────────────────────
+function _fbSyncBadge(state){
+  let el=document.getElementById('sheets-sync-badge');if(!el)return;
+  if(state==='ok'){el.style.display='inline';el.style.background='#e8f4ea';el.style.color='#2d6a4f';el.textContent='☁ Guardado';setTimeout(()=>{if(el)el.style.display='none';},3000);}
+  else if(state==='error'){el.style.display='inline';el.style.background='#ffe5e5';el.style.color='#c92a2a';el.textContent='☁ Error Firebase';setTimeout(()=>{if(el)el.style.display='none';},5000);}
 }
 function _saveToFirebase(doc){
-  if(!_firebaseReady){return;} // evita sobrescribir Firebase antes de cargar datos
   try{
     const ts=new Date().toISOString();
     if(doc==='ba'){
-      db.collection('crm').doc('ba').set({clients:ba_clients,meetings:ba_meetings,gmtgs:ba_globalMtgs,actions:ba_actions,weeklyLog:ba_weeklyLog,statusLog:ba_statusLog,interactions:ba_interactions,tariff:BA_TARIFF,billing:ba_billing,updatedAt:ts})
-        .then(()=>_fbBadge(true)).catch(e=>{console.warn('FB:',e);_fbBadge(false);});
+      db.collection('crm').doc('ba').set({
+        clients:ba_clients,meetings:ba_meetings,gmtgs:ba_globalMtgs,
+        actions:ba_actions,weeklyLog:ba_weeklyLog,statusLog:ba_statusLog,
+        interactions:ba_interactions,tariff:BA_TARIFF,billing:ba_billing,updatedAt:ts
+      }).then(()=>_fbSyncBadge('ok')).catch(e=>{console.warn('FB save:',e);_fbSyncBadge('error');});
     }else if(doc==='bs'){
-      db.collection('crm').doc('bs').set({clients:bs_clients,meetings:bs_meetings,gmtgs:bs_globalMtgs,actions:bs_actions,weeklyLog:bs_weeklyLog,statusLog:bs_statusLog,interactions:bs_interactions,tariff:BS_TARIFF,updatedAt:ts})
-        .then(()=>_fbBadge(true)).catch(e=>{console.warn('FB:',e);_fbBadge(false);});
+      db.collection('crm').doc('bs').set({
+        clients:bs_clients,meetings:bs_meetings,gmtgs:bs_globalMtgs,
+        actions:bs_actions,weeklyLog:bs_weeklyLog,statusLog:bs_statusLog,
+        interactions:bs_interactions,tariff:BS_TARIFF,updatedAt:ts
+      }).then(()=>_fbSyncBadge('ok')).catch(e=>{console.warn('FB save:',e);_fbSyncBadge('error');});
     }else if(doc==='settings'){
       db.collection('crm').doc('settings').set({fxRate:fxRate,updatedAt:ts});
     }
-  }catch(e){console.warn('Firebase error:',e);}
+  }catch(e){console.warn('Firebase save error:',e);}
 }
 async function _loadFromFirebase(){
   try{
-    const [baSnap,bsSnap,settSnap]=await Promise.all([
-      db.collection('crm').doc('ba').get({source:'server'}),
-      db.collection('crm').doc('bs').get({source:'server'}),
-      db.collection('crm').doc('settings').get({source:'server'})
+    const [baSnap,bsSnap,settSnap,usersSnap]=await Promise.all([
+      db.collection('crm').doc('ba').get(),
+      db.collection('crm').doc('bs').get(),
+      db.collection('crm').doc('settings').get(),
+      db.collection('crm').doc('users').get()
     ]);
-    if(baSnap.exists){const d=baSnap.data();
-      if(d.clients&&d.clients.length>0)ba_clients=d.clients;
-      if(d.meetings)ba_meetings=d.meetings;if(d.gmtgs)ba_globalMtgs=d.gmtgs;
-      if(d.actions)ba_actions=d.actions;if(d.weeklyLog)ba_weeklyLog=d.weeklyLog;
-      if(d.statusLog)ba_statusLog=d.statusLog;if(d.interactions)ba_interactions=d.interactions;
-      if(d.tariff)BA_TARIFF=d.tariff;if(d.billing)ba_billing=d.billing;
+    if(usersSnap.exists){const d=usersSnap.data();if(d.users&&Object.keys(d.users).length>0){localStorage.setItem('baum_users_v3',JSON.stringify(d.users));appUsers=d.users;}}
+    if(baSnap.exists){
+      const d=baSnap.data();
+      if(d.clients&&d.clients.length>0) ba_clients=d.clients;
+      if(d.meetings) ba_meetings=d.meetings;
+      if(d.gmtgs) ba_globalMtgs=d.gmtgs;
+      if(d.actions) ba_actions=d.actions;
+      if(d.weeklyLog) ba_weeklyLog=d.weeklyLog;
+      if(d.statusLog) ba_statusLog=d.statusLog;
+      if(d.interactions) ba_interactions=d.interactions;
+      if(d.tariff) BA_TARIFF=d.tariff;
+      if(d.billing) ba_billing=d.billing;
     }
-    if(bsSnap.exists){const d=bsSnap.data();
-      if(d.clients&&d.clients.length>0)bs_clients=d.clients;
-      if(d.meetings)bs_meetings=d.meetings;if(d.gmtgs)bs_globalMtgs=d.gmtgs;
-      if(d.actions)bs_actions=d.actions;if(d.weeklyLog)bs_weeklyLog=d.weeklyLog;
-      if(d.statusLog)bs_statusLog=d.statusLog;if(d.interactions)bs_interactions=d.interactions;
-      if(d.tariff)BS_TARIFF=d.tariff;
+    if(bsSnap.exists){
+      const d=bsSnap.data();
+      if(d.clients&&d.clients.length>0) bs_clients=d.clients;
+      if(d.meetings) bs_meetings=d.meetings;
+      if(d.gmtgs) bs_globalMtgs=d.gmtgs;
+      if(d.actions) bs_actions=d.actions;
+      if(d.weeklyLog) bs_weeklyLog=d.weeklyLog;
+      if(d.statusLog) bs_statusLog=d.statusLog;
+      if(d.interactions) bs_interactions=d.interactions;
+      if(d.tariff) BS_TARIFF=d.tariff;
     }
     if(settSnap.exists){const d=settSnap.data();if(d.fxRate)fxRate=d.fxRate;}
-    if(currentPlatform==='baumapp'){clients=ba_clients;meetings=ba_meetings;globalMtgs=ba_globalMtgs;actions=ba_actions;weeklyLog=ba_weeklyLog;statusLog=ba_statusLog;interactions=ba_interactions;}
-    else{clients=bs_clients;meetings=bs_meetings;globalMtgs=bs_globalMtgs;actions=bs_actions;weeklyLog=bs_weeklyLog;statusLog=bs_statusLog;interactions=bs_interactions;}
+    // Re-sync active references
+    if(currentPlatform==='baumapp'){
+      clients=ba_clients;meetings=ba_meetings;globalMtgs=ba_globalMtgs;
+      actions=ba_actions;weeklyLog=ba_weeklyLog;statusLog=ba_statusLog;interactions=ba_interactions;
+    }else{
+      clients=bs_clients;meetings=bs_meetings;globalMtgs=bs_globalMtgs;
+      actions=bs_actions;weeklyLog=bs_weeklyLog;statusLog=bs_statusLog;interactions=bs_interactions;
+    }
     return true;
   }catch(e){console.warn('Firebase load error:',e);return false;}
 }
-// ─────────────────────────────────────────────────────────────
+// ────────────────────────────────────────────────────────────
 
 const STAGES=[{id:'Prospecto',label:'Prospecto',color:'#7fb3d3',order:0},{id:'Contactado',label:'Contactado',color:'#5a9bb5',order:1},{id:'Propuesta',label:'Propuesta',color:'#4a9d8f',order:2},{id:'Piloto',label:'Piloto',color:'#40916c',order:3},{id:'Contrato',label:'Contrato',color:'#2d6a4f',order:4},{id:'Activo',label:'Activo',color:'#1b4332',order:5}];
 const INITIAL_CLIENTS=[{id:1,name:'BaumSystem',field:'Varios',type:'Distribuidor',country:'Chile',region:'Nacional',hectares:9564.7,pricePerHaYear:7.5,arr:71735.25,mrr:5977.94,status:'Activo',startDate:'2026-04-01',progress:100,notes:'Cliente ancla. Su historial de 31 meses sirve como referencia CHURN para BaumApp.',email:'',phone:''},{id:2,name:'Agr. Campo Bonito',field:'El Tránsito',type:'Directo',country:'Chile',region:null,hectares:15,pricePerHaYear:25,arr:375,mrr:31.25,status:'Activo',startDate:'2025-12-01',progress:100,notes:'',email:'',phone:''},{id:3,name:'Monte Alegre',field:'Agroberries Mx',type:'Directo',country:'México',region:null,hectares:590,pricePerHaYear:15,arr:8850,mrr:737.5,status:'Activo',startDate:'2026-01-01',progress:100,notes:'',email:'',phone:''},{id:4,name:'Huillinco',field:'Ramadilla',type:'Directo',country:'Chile',region:null,hectares:62.72,pricePerHaYear:16.73,arr:1049.56,mrr:87.46,status:'Activo',startDate:'2026-01-01',progress:100,notes:'',email:'',phone:''},{id:5,name:'Agro Socoin',field:'Talca',type:'Directo',country:'Chile',region:'Talca',hectares:361.25,pricePerHaYear:15,arr:5418.75,mrr:451.56,status:'Activo',startDate:'2026-05-01',progress:100,notes:'También cliente BaumSystem. Inicio Mayo 2026.',email:'',phone:''},{id:6,name:'San José',field:'Cerrillo',type:'Directo',country:'Chile',region:'Buin',hectares:140,pricePerHaYear:13.8,arr:1932.41,mrr:161.03,status:'Activo',startDate:'2026-05-01',progress:100,notes:'También cliente BaumSystem. Inicio Mayo 2026.',email:'',phone:''},{id:7,name:'Bafar',field:'—',type:'Directo',country:'México',region:null,hectares:1904,pricePerHaYear:9,arr:17136,mrr:1428,status:'Piloto',startDate:null,progress:40,notes:'',email:'',phone:''},{id:8,name:'BlueGold',field:'—',type:'Directo',country:'Perú',region:null,hectares:400,pricePerHaYear:12,arr:4800,mrr:400,status:'Piloto',startDate:null,progress:40,notes:'',email:'',phone:''},{id:9,name:'AgroBlue',field:'—',type:'Directo',country:'Perú',region:null,hectares:230,pricePerHaYear:15,arr:3450,mrr:287.5,status:'Piloto',startDate:null,progress:40,notes:'',email:'',phone:''},{id:10,name:'Las Mellizas',field:'—',type:'Directo',country:'Chile',region:null,hectares:62,pricePerHaYear:25,arr:1550,mrr:129.17,status:'Prospecto',startDate:null,progress:15,notes:'',email:'',phone:''},{id:11,name:'Agroberries Perú',field:'—',type:'Directo',country:'Perú',region:null,hectares:840,pricePerHaYear:7.5,arr:6300,mrr:525,status:'Prospecto',startDate:null,progress:15,notes:'',email:'',phone:''},{id:12,name:'Carlos Bermudes',field:'—',type:'Distribuidor',country:'Chile',region:null,hectares:2000,pricePerHaYear:7.5,arr:15000,mrr:1250,status:'Prospecto',startDate:null,progress:20,notes:'',email:'',phone:''},{id:13,name:'Smart Drop',field:'—',type:'Distribuidor',country:'México',region:null,hectares:5000,pricePerHaYear:7.5,arr:37500,mrr:3125,status:'Prospecto',startDate:null,progress:10,notes:'',email:'',phone:''},{id:14,name:'WiseConn',field:'—',type:'Distribuidor',country:'Chile',region:null,hectares:5000,pricePerHaYear:7.5,arr:37500,mrr:3125,status:'Prospecto',startDate:null,progress:10,notes:'',email:'',phone:''}];
@@ -1337,9 +1338,71 @@ function persist(){
   }
   localStorage.setItem('baum_fx',fxRate.toString());
   localStorage.setItem('ba_baum_billing',JSON.stringify(ba_billing));
+  // Sync a Google Sheets + Firebase (fire-and-forget)
+  _syncToSheets();
   _saveToFirebase(currentPlatform==='baumapp'?'ba':'bs');
   _saveToFirebase('settings');
 }
+
+// ─── GOOGLE SHEETS SYNC FUNCTIONS ────────────────────────────
+function _sheetsBadge(state){
+  const el=document.getElementById('sheets-sync-badge');if(!el||!SHEETS_API_URL)return;
+  if(state==='saving'){el.style.display='inline';el.style.background='#fff3cd';el.style.color='#856404';el.textContent='☁ Guardando…';}
+  else if(state==='ok'){el.style.display='inline';el.style.background='#e8f4ea';el.style.color='#2d6a4f';el.textContent='☁ Guardado';setTimeout(()=>{if(el)el.style.display='none';},4000);}
+  else if(state==='error'){el.style.display='inline';el.style.background='#ffe5e5';el.style.color='#c92a2a';el.textContent='☁ Error al guardar';setTimeout(()=>{if(el)el.style.display='none';},6000);}
+  else if(state==='loading'){el.style.display='inline';el.style.background='#e3effd';el.style.color='#0073ea';el.textContent='☁ Cargando…';}
+}
+function _buildSheetsPayload(){
+  return JSON.stringify({
+    platform: currentPlatform,
+    ts: new Date().toISOString(),
+    ba:{clients:ba_clients,meetings:ba_meetings,globalMtgs:ba_globalMtgs,actions:ba_actions,weeklyLog:ba_weeklyLog,statusLog:ba_statusLog,interactions:ba_interactions},
+    bs:{clients:bs_clients,meetings:bs_meetings,globalMtgs:bs_globalMtgs,actions:bs_actions,weeklyLog:bs_weeklyLog,statusLog:bs_statusLog,interactions:bs_interactions},
+    fxRate:fxRate
+  });
+}
+function _syncToSheets(){
+  if(!SHEETS_API_URL)return;
+  _sheetsBadge('saving');
+  const body=_buildSheetsPayload();
+  fetch(SHEETS_API_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:body})
+    .then(()=>_sheetsBadge('ok'))
+    .catch(()=>_sheetsBadge('error'));
+}
+async function _loadFromSheets(){
+  if(!SHEETS_API_URL)return false;
+  try{
+    _sheetsBadge('loading');
+    const res=await fetch(SHEETS_API_URL+'?t='+Date.now());
+    if(!res.ok)throw new Error('http '+res.status);
+    const raw=await res.text();
+    if(!raw||raw==='{}'||raw.length<10)return false;
+    const d=JSON.parse(raw);
+    if(!d||!d.ba||!d.bs)return false;
+    // Restaurar datos BA
+    if(Array.isArray(d.ba.clients)&&d.ba.clients.length>0){ba_clients=d.ba.clients;localStorage.setItem('ba_baum_clients',JSON.stringify(ba_clients));}
+    if(d.ba.meetings){ba_meetings=d.ba.meetings;localStorage.setItem('ba_baum_meetings',JSON.stringify(ba_meetings));}
+    if(d.ba.globalMtgs){ba_globalMtgs=d.ba.globalMtgs;localStorage.setItem('ba_baum_gmtgs',JSON.stringify(ba_globalMtgs));}
+    if(d.ba.statusLog){ba_statusLog=d.ba.statusLog;localStorage.setItem('ba_baum_statuslog',JSON.stringify(ba_statusLog));}
+    if(d.ba.interactions){ba_interactions=d.ba.interactions;localStorage.setItem('ba_baum_interactions',JSON.stringify(ba_interactions));}
+    // Restaurar datos BS
+    if(Array.isArray(d.bs.clients)){bs_clients=d.bs.clients;localStorage.setItem('bs_baum_clients',JSON.stringify(bs_clients));}
+    if(d.bs.meetings){bs_meetings=d.bs.meetings;localStorage.setItem('bs_baum_meetings',JSON.stringify(bs_meetings));}
+    if(d.bs.globalMtgs){bs_globalMtgs=d.bs.globalMtgs;localStorage.setItem('bs_baum_gmtgs',JSON.stringify(bs_globalMtgs));}
+    if(d.bs.statusLog){bs_statusLog=d.bs.statusLog;localStorage.setItem('bs_baum_statuslog',JSON.stringify(bs_statusLog));}
+    if(d.bs.interactions){bs_interactions=d.bs.interactions;localStorage.setItem('bs_baum_interactions',JSON.stringify(bs_interactions));}
+    // Actualizar referencias activas
+    clients=currentPlatform==='baumapp'?ba_clients:bs_clients;
+    meetings=currentPlatform==='baumapp'?ba_meetings:bs_meetings;
+    globalMtgs=currentPlatform==='baumapp'?ba_globalMtgs:bs_globalMtgs;
+    statusLog=currentPlatform==='baumapp'?ba_statusLog:bs_statusLog;
+    interactions=currentPlatform==='baumapp'?ba_interactions:bs_interactions;
+    if(d.fxRate&&!isNaN(d.fxRate)){fxRate=Number(d.fxRate);localStorage.setItem('baum_fx',fxRate.toString());}
+    _sheetsBadge('ok');
+    return true;
+  }catch(e){console.warn('[Sheets] Error al cargar:',e);_sheetsBadge('error');return false;}
+}
+// ─────────────────────────────────────────────────────────────
 function loadAppUsers(){
   try{
     const stored=localStorage.getItem('baum_users_v3');
@@ -1350,20 +1413,59 @@ function loadAppUsers(){
       if(keys.length>0&&keys.some(k=>k.includes('@')&&parsed[k]&&parsed[k].password))return parsed;
     }
   }catch(e){}
-  // No valid v3 data — start fresh with defaults (merge any custom users from old versions would be lost, but ensures login works)
+  // No valid v3 data — start fresh with defaults
   localStorage.setItem('baum_users_v3',JSON.stringify(DEFAULT_USERS));
+  // Subir defaults a Firebase para que otros dispositivos los encuentren
+  db.collection('crm').doc('users').get().then(snap=>{if(!snap.exists)db.collection('crm').doc('users').set({users:DEFAULT_USERS,updatedAt:new Date().toISOString()});});
   return{...DEFAULT_USERS};
 }
-function saveAppUsers(u){localStorage.setItem('baum_users_v3',JSON.stringify(u))}
+function saveAppUsers(u){
+  localStorage.setItem('baum_users_v3',JSON.stringify(u));
+  db.collection('crm').doc('users').set({users:u,updatedAt:new Date().toISOString()}).catch(e=>console.warn('FB users save:',e));
+}
+function importarBackup(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    try{
+      const parsed=JSON.parse(ev.target.result);
+      const data=parsed.data||parsed; // soporta formato {_version,data} o plano
+      if(typeof data!=='object'||!data)throw new Error('formato inválido');
+      const keys=Object.keys(data);
+      if(keys.length===0)throw new Error('sin datos');
+      // Escribir cada clave en localStorage
+      keys.forEach(k=>{ if(data[k])localStorage.setItem(k,data[k]); });
+      showToast('✅ Datos importados correctamente. Recargando…');
+      setTimeout(()=>location.reload(),1500);
+    }catch(err){
+      alert('❌ No se pudo importar el respaldo: '+err.message+'\nAsegúrate de seleccionar el archivo backup_crm_*.json generado por la herramienta de migración.');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value=''; // limpiar input para permitir reimportar el mismo archivo
+}
 let appUsers=loadAppUsers();
 function checkAuth(){if(!sessionStorage.getItem('baum_auth')){document.getElementById('login-screen').style.display='flex'}else{document.getElementById('login-screen').style.display='none';const name=sessionStorage.getItem('baum_user_name')||sessionStorage.getItem('baum_user')||'Usuario';document.getElementById('user-badge').textContent=name.charAt(0).toUpperCase()+name.slice(1);init()}}
-function doLogin(){
+async function doLogin(){
   const email=document.getElementById('login-user').value.trim().toLowerCase();
   const pass=document.getElementById('login-pass').value;
   const err=document.getElementById('login-error');
   if(!email||!pass){err.textContent='Ingresa correo y contraseña';return}
+  err.textContent='Verificando…';
   appUsers=loadAppUsers();
-  const userData=appUsers[email];
+  let userData=appUsers[email];
+  // Si no está en localStorage, intentar cargar desde Firebase
+  if(!userData){
+    try{
+      const snap=await db.collection('crm').doc('users').get();
+      if(snap.exists&&snap.data().users){
+        const fbUsers=snap.data().users;
+        localStorage.setItem('baum_users_v3',JSON.stringify(fbUsers));
+        appUsers=fbUsers;
+        userData=fbUsers[email];
+      }
+    }catch(e){console.warn('FB users fetch:',e);}
+  }
   const isValid=userData&&typeof userData==='object'&&userData.password===pass;
   if(isValid){
     sessionStorage.setItem('baum_auth','1');
@@ -1496,9 +1598,10 @@ function promoteHectaresOnAdvance(c,newStageId){
 }
 function recordStatusChange(clientId,newStatus){if(!statusLog[clientId])statusLog[clientId]=[];statusLog[clientId].push({status:newStatus,date:new Date().toISOString()})}
 function setPipelineFilter(f,el){pipelineFilter=f;document.querySelectorAll('.filter-bar .filter-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');renderPipeline()}
-function renderClients(){let filtered=clients;if(currentFilter!=='todos')filtered=clients.filter(c=>{if(currentFilter==='Directo'||currentFilter==='Distribuidor')return c.type===currentFilter;return c.status===currentFilter});const tbody=document.getElementById('clients-tbody'),empty=document.getElementById('clients-empty');if(filtered.length===0){tbody.innerHTML='';empty.style.display='block'}else{empty.style.display='none';tbody.innerHTML=filtered.map(c=>{const factMensual=((c.pricePerHaYear||0)*(c.hectares||0))/12;const _pot=c.hectaresPotential!=null?c.hectaresPotential:c.hectares;return`<tr style="cursor:pointer" onclick="openEditModal(${c.id})"><td><strong>${c.name}${c.syncedFrom==='baumsystem'?'<span class="sync-badge">🔄</span>':''}</strong></td><td>${c.country}</td><td>${fmtNum(c.hectares)}</td><td>${fmtNum(_pot)}</td><td>${fmt(c.pricePerHaYear||0)}</td><td>${fmt(factMensual)}</td><td>${c.type}</td><td><span class="status-badge ${statusBadgeClass(c.status)}">${c.status}</span></td><td>${c.email||'—'}</td><td>${c.phone||'—'}</td></tr>`}).join('')}}
+function _clientMobileCard(c){const factMensual=((c.pricePerHaYear||0)*(c.hectares||0))/12;const _pot=c.hectaresPotential!=null?c.hectaresPotential:c.hectares;const stageColor=(()=>{const CURRENT_STAGES=currentPlatform==='baumapp'?STAGES:BS_STAGES;const s=CURRENT_STAGES.find(x=>x.id===c.status);return s?s.color:'var(--primary)'})();return`<div class="client-card-mobile" style="border-left-color:${stageColor}" onclick="openEditModal(${c.id})"><div class="ccm-header"><div class="ccm-name">${c.name}${c.syncedFrom==='baumsystem'?'<span class="sync-badge">🔄</span>':''}</div><span class="status-badge ${statusBadgeClass(c.status)}">${c.status}</span></div><div class="ccm-grid"><div class="ccm-field"><div class="ccm-label">Ha Cerradas</div><div class="ccm-value">${fmtNum(c.hectares)} ha</div></div><div class="ccm-field"><div class="ccm-label">Ha Potencial</div><div class="ccm-value">${fmtNum(_pot)} ha</div></div><div class="ccm-field"><div class="ccm-label">USD/ha/año</div><div class="ccm-value">${fmt(c.pricePerHaYear||0)}</div></div><div class="ccm-field"><div class="ccm-label">Fact. Mensual</div><div class="ccm-value">${fmt(factMensual)}</div></div></div><div class="ccm-footer"><span>${c.country} · ${c.type}</span><span>${c.email||c.phone||''}</span></div></div>`}
+function renderClients(){let filtered=clients;if(currentFilter!=='todos')filtered=clients.filter(c=>{if(currentFilter==='Directo'||currentFilter==='Distribuidor')return c.type===currentFilter;return c.status===currentFilter});const tbody=document.getElementById('clients-tbody'),empty=document.getElementById('clients-empty'),cards=document.getElementById('clients-cards');if(filtered.length===0){tbody.innerHTML='';if(cards)cards.innerHTML='';empty.style.display='block'}else{empty.style.display='none';tbody.innerHTML=filtered.map(c=>{const factMensual=((c.pricePerHaYear||0)*(c.hectares||0))/12;const _pot=c.hectaresPotential!=null?c.hectaresPotential:c.hectares;return`<tr style="cursor:pointer" onclick="openEditModal(${c.id})"><td><strong>${c.name}${c.syncedFrom==='baumsystem'?'<span class="sync-badge">🔄</span>':''}</strong></td><td>${c.country}</td><td>${fmtNum(c.hectares)}</td><td>${fmtNum(_pot)}</td><td>${fmt(c.pricePerHaYear||0)}</td><td>${fmt(factMensual)}</td><td>${c.type}</td><td><span class="status-badge ${statusBadgeClass(c.status)}">${c.status}</span></td><td>${c.email||'—'}</td><td>${c.phone||'—'}</td></tr>`}).join('');if(cards)cards.innerHTML=filtered.map(_clientMobileCard).join('')}}
 function filterClients(f,el){currentFilter=f;document.querySelectorAll('#view-clientes .filter-btn').forEach(b=>b.classList.remove('active'));el.classList.add('active');renderClients()}
-function searchClients(term){let filtered=clients.filter(c=>c.name.toLowerCase().includes(term.toLowerCase()));const tbody=document.getElementById('clients-tbody'),empty=document.getElementById('clients-empty');if(filtered.length===0){tbody.innerHTML='';empty.style.display='block'}else{empty.style.display='none';tbody.innerHTML=filtered.map(c=>{const factMensual=((c.pricePerHaYear||0)*(c.hectares||0))/12;const _pot=c.hectaresPotential!=null?c.hectaresPotential:c.hectares;return`<tr><td><strong>${c.name}${c.syncedFrom==='baumsystem'?'<span class="sync-badge">🔄</span>':''}</strong></td><td>${c.country}</td><td>${fmtNum(c.hectares)}</td><td>${fmtNum(_pot)}</td><td>${fmt(c.pricePerHaYear||0)}</td><td>${fmt(factMensual)}</td><td>${c.type}</td><td><span class="status-badge ${statusBadgeClass(c.status)}">${c.status}</span></td><td>${c.email||'—'}</td><td>${c.phone||'—'}</td><td><button class="btn btn-secondary" style="padding:4px 8px;font-size:11px" onclick="openEditModal(${c.id})">Ver</button></td></tr>`}).join('')}}
+function searchClients(term){let filtered=clients.filter(c=>c.name.toLowerCase().includes(term.toLowerCase()));const tbody=document.getElementById('clients-tbody'),empty=document.getElementById('clients-empty'),cards=document.getElementById('clients-cards');if(filtered.length===0){tbody.innerHTML='';if(cards)cards.innerHTML='';empty.style.display='block'}else{empty.style.display='none';tbody.innerHTML=filtered.map(c=>{const factMensual=((c.pricePerHaYear||0)*(c.hectares||0))/12;const _pot=c.hectaresPotential!=null?c.hectaresPotential:c.hectares;return`<tr><td><strong>${c.name}${c.syncedFrom==='baumsystem'?'<span class="sync-badge">🔄</span>':''}</strong></td><td>${c.country}</td><td>${fmtNum(c.hectares)}</td><td>${fmtNum(_pot)}</td><td>${fmt(c.pricePerHaYear||0)}</td><td>${fmt(factMensual)}</td><td>${c.type}</td><td><span class="status-badge ${statusBadgeClass(c.status)}">${c.status}</span></td><td>${c.email||'—'}</td><td>${c.phone||'—'}</td><td><button class="btn btn-secondary" style="padding:4px 8px;font-size:11px" onclick="openEditModal(${c.id})">Ver</button></td></tr>`}).join('');if(cards)cards.innerHTML=filtered.map(_clientMobileCard).join('')}}
 function openEditModal(id){currentEditingId=id;const c=clients.find(cl=>cl.id===id);if(!c)return;modalStatus=c.status||'Prospecto';/* FIX 2026-04-21: sincronizar modalStatus con el status real del cliente */document.getElementById('client-modal-title').innerHTML=c.name+(c.syncedFrom==='baumsystem'?'<span class="sync-badge">🔄</span>':'');const CURRENT_STAGES=currentPlatform==='baumapp'?STAGES:BS_STAGES,stageIndex=CURRENT_STAGES.findIndex(s=>s.id===c.status);document.getElementById('stage-bar').innerHTML=CURRENT_STAGES.map((s,i)=>`<div class="stage-segment ${i<=stageIndex?'completed':''} ${i===stageIndex?'active':''}" style="background:${i<=stageIndex?s.color:'#e8e8e8'}"></div>`).join('');document.getElementById('modal-name').value=c.name||'';document.getElementById('modal-country').value=c.country||'Chile';document.getElementById('modal-region').value=c.region||'';document.getElementById('modal-email').value=c.email||'';document.getElementById('modal-phone').value=c.phone||'';document.getElementById('modal-type').value=c.type||'Directo';document.getElementById('modal-field').value=c.field||'';document.getElementById('modal-closing-prob').value=c.closingProbability||'0';document.getElementById('modal-hectares').value=c.hectares||'';document.getElementById('modal-hectares-potential').value=(c.hectaresPotential!=null?c.hectaresPotential:c.hectares)||'';document.getElementById('modal-hectares-possible').value=c.hectaresPossible||'';document.getElementById('modal-hectares-pipeline').value=(((c.hectaresPotential!=null?c.hectaresPotential:c.hectares)||0)-(c.hectares||0)).toFixed(2);const _priceLabel=document.getElementById('modal-price-label');if(_priceLabel)_priceLabel.textContent=currentPlatform==='baumsystem'?'Precio por Ha/Año (CLP)':'Precio por Ha/Año (USD)';document.getElementById('modal-price').value=c.pricePerHaYear||'';const _ha=c.hectares||0,_pr=c.pricePerHaYear||0;document.getElementById('modal-arr').value=(_ha*_pr).toFixed(2);document.getElementById('modal-mrr').value=(_ha*_pr/12).toFixed(2);document.getElementById('modal-start-date').value=c.startDate||'';document.getElementById('modal-notes').value=c.notes||'';modalImpResp=c.impResp||'cliente';selectClientImpResp(modalImpResp);document.getElementById('modal-imp-otro-name').value=c.impRespName||'';const _recalcHa=function(){const ha=parseFloat(document.getElementById('modal-hectares').value)||0;const pot=parseFloat(document.getElementById('modal-hectares-potential').value)||ha;const price=parseFloat(document.getElementById('modal-price').value)||0;document.getElementById('modal-arr').value=(ha*price).toFixed(2);document.getElementById('modal-mrr').value=(ha*price/12).toFixed(2);document.getElementById('modal-hectares-pipeline').value=Math.max(0,pot-ha).toFixed(2);};document.getElementById('modal-hectares').oninput=_recalcHa;document.getElementById('modal-hectares-potential').oninput=_recalcHa;document.getElementById('modal-price').oninput=_recalcHa;const statusButtons=document.getElementById('status-buttons');const CURRENT_STAGES_SB=currentPlatform==='baumapp'?STAGES:BS_STAGES;statusButtons.innerHTML=CURRENT_STAGES_SB.map(s=>`<button class="btn ${c.status===s.id?'active':''}" style="background:${c.status===s.id?s.color:'#f0f0f0'};color:${c.status===s.id?'white':'var(--text-gray)'}" onclick="setModalStatus('${s.id}')">${s.label}</button>`).join('');const hist=statusLog[id]||[];document.getElementById('status-history').innerHTML=hist.length===0?'<div style="font-size:12px;color:var(--text-gray)">Sin cambios registrados</div>':hist.map(h=>`<div style="font-size:11px;color:var(--text-gray)"><strong>${h.status}</strong> • ${new Date(h.date).toLocaleDateString('es-CL')}</div>`).join('');previousOwner=c.owner||'';populateOwnerSelect(c.owner||'');document.getElementById('modal-owner-notify').style.display='none';renderInteractionsTimeline();populateNextActionFields();modalQuotations=Array.isArray(c.quotations)?c.quotations.slice():[];document.getElementById('modal-quotation-file').value='';document.getElementById('modal-quotation-notes').value='';document.getElementById('modal-quotation-state').value='enviada';renderQuotationsList();document.getElementById('client-modal').classList.add('active');switchClientTab('info')}
 function openNewClientModal(stageId='Prospecto'){currentEditingId=null;modalStatus=stageId;/* FIX 2026-04-21: respetar la etapa donde se abre el modal */document.getElementById('client-modal-title').textContent='Nuevo Cliente';document.getElementById('stage-bar').innerHTML='';document.getElementById('modal-name').value='';document.getElementById('modal-country').value='Chile';document.getElementById('modal-region').value='';document.getElementById('modal-email').value='';document.getElementById('modal-phone').value='';document.getElementById('modal-type').value='Directo';document.getElementById('modal-field').value='';document.getElementById('modal-closing-prob').value='0';document.getElementById('modal-hectares').value='';document.getElementById('modal-hectares-potential').value='';document.getElementById('modal-hectares-possible').value='';document.getElementById('modal-hectares-pipeline').value='';const _priceLabel=document.getElementById('modal-price-label');if(_priceLabel)_priceLabel.textContent=currentPlatform==='baumsystem'?'Precio por Ha/Año (CLP)':'Precio por Ha/Año (USD)';document.getElementById('modal-price').value='';document.getElementById('modal-arr').value='';document.getElementById('modal-mrr').value='';document.getElementById('modal-start-date').value='';const _recalcHaNew=function(){const ha=parseFloat(document.getElementById('modal-hectares').value)||0;const pot=parseFloat(document.getElementById('modal-hectares-potential').value)||ha;const price=parseFloat(document.getElementById('modal-price').value)||0;document.getElementById('modal-arr').value=(ha*price).toFixed(2);document.getElementById('modal-mrr').value=(ha*price/12).toFixed(2);document.getElementById('modal-hectares-pipeline').value=Math.max(0,pot-ha).toFixed(2);};document.getElementById('modal-hectares').oninput=_recalcHaNew;document.getElementById('modal-hectares-potential').oninput=_recalcHaNew;document.getElementById('modal-price').oninput=_recalcHaNew;document.getElementById('modal-notes').value='';modalImpResp='cliente';selectClientImpResp('cliente');document.getElementById('modal-imp-otro-name').value='';const statusButtons=document.getElementById('status-buttons');const CURRENT_STAGES_SB=currentPlatform==='baumapp'?STAGES:BS_STAGES;statusButtons.innerHTML=CURRENT_STAGES_SB.map(s=>`<button class="btn ${stageId===s.id?'active':''}" style="background:${stageId===s.id?s.color:'#f0f0f0'};color:${stageId===s.id?'white':'var(--text-gray)'}" onclick="setModalStatus('${s.id}')">${s.label}</button>`).join('');document.getElementById('status-history').innerHTML='<div style="font-size:12px;color:var(--text-gray)">Nuevo cliente</div>';previousOwner='';populateOwnerSelect('');document.getElementById('modal-owner-notify').style.display='none';renderInteractionsTimeline();populateNextActionFields();modalQuotations=[];document.getElementById('modal-quotation-file').value='';document.getElementById('modal-quotation-notes').value='';document.getElementById('modal-quotation-state').value='enviada';renderQuotationsList();document.getElementById('client-modal').classList.add('active');switchClientTab('info')}
 function closeEditModal(){document.getElementById('client-modal').classList.remove('active')}
@@ -2257,50 +2360,25 @@ function renderWeeklySummary(){
 
 function renderVelocidad(){const vt=document.getElementById('velocity-tbody'),noD=document.getElementById('velocity-no-data'),kpis=document.getElementById('velocity-kpis');if(!vt||!kpis)return;const MS_W=604800000;const getStart=c=>{if(c.createdAt)return c.createdAt;const sl=statusLog[c.id]||[];return sl.length>0?sl.reduce((m,e)=>e.date<m?e.date:m,sl[0].date):null;};const getEnd=c=>{const sl=statusLog[c.id]||[];if(c.status==='Activo'){const e=[...sl].reverse().find(x=>x.status==='Activo');if(e)return{d:e.date,t:'won'};if(c.startDate)return{d:c.startDate+'T12:00:00',t:'won'};return{d:new Date().toISOString(),t:'open'};}if(c.status==='Perdido')return{d:c.lossDate||new Date().toISOString(),t:'lost'};return{d:new Date().toISOString(),t:'open'};};const proc=clients.map(c=>{const s=getStart(c),end=getEnd(c);if(!s)return{c,ok:false};const w=Math.max(0,(new Date(end.d)-new Date(s))/MS_W);return{c,ok:true,start:s,end:end.d,weeks:w,et:end.t,sc:(statusLog[c.id]||[]).length};});const withD=proc.filter(x=>x.ok).sort((a,b)=>{const ord={won:0,lost:1,open:2};return (ord[a.et]||0)-(ord[b.et]||0)||a.weeks-b.weeks;});const noL=proc.filter(x=>!x.ok);const won=withD.filter(x=>x.et==='won'),lost=withD.filter(x=>x.et==='lost'),open=withD.filter(x=>x.et==='open');const avg=arr=>arr.length?(arr.reduce((s,x)=>s+x.weeks,0)/arr.length).toFixed(1):'—';kpis.innerHTML='<div class="kpi-card"><div class="kpi-label">⌀ Semanas para cerrar</div><div class="kpi-value" style="color:#2d6a4f">'+avg(won)+'</div><div class="kpi-sub">'+won.length+' cliente'+(won.length!==1?'s':'')+' cerrado'+(won.length!==1?'s':'')+'</div></div><div class="kpi-card"><div class="kpi-label">⌀ Semanas para perder</div><div class="kpi-value" style="color:#e44258">'+avg(lost)+'</div><div class="kpi-sub">'+lost.length+' perdido'+(lost.length!==1?'s':'')+'</div></div><div class="kpi-card"><div class="kpi-label">En pipeline activo</div><div class="kpi-value" style="color:#fdab3d">'+open.length+'</div><div class="kpi-sub">Prom. '+avg(open)+' sem. en curso</div></div><div class="kpi-card"><div class="kpi-label">Sin historial</div><div class="kpi-value" style="color:var(--text-gray)">'+noL.length+'</div><div class="kpi-sub">Clientes previos al registro</div></div>';const SCOL={Prospecto:'#7fb3d3',Contactado:'#5a9bb5',Propuesta:'#4a9d8f',Piloto:'#40916c',Contrato:'#2d6a4f',Activo:'#1b4332',Perdido:'#e44258'};const TCOL={won:'#2d6a4f',lost:'#e44258',open:'#fdab3d'};const TLBL={won:'✓ Cerrado',lost:'✗ Perdido',open:'⏱ En curso'};const fD=iso=>{try{return new Date(iso).toLocaleDateString('es-CL',{day:'2-digit',month:'short',year:'2-digit'})}catch(e){return'—'}};const mxW=withD.length?Math.max(...withD.map(x=>x.weeks),1):1;vt.innerHTML=withD.map(x=>{const pct=Math.min((x.weeks/mxW)*100,100),col=TCOL[x.et],sc=SCOL[x.c.status]||'#999';return'<tr style="border-bottom:1px solid #f0f0f0"><td style="padding:8px 10px"><strong>'+x.c.name+'</strong></td><td style="padding:8px 10px"><span style="display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;font-weight:600;background:'+sc+';color:white">'+x.c.status+'</span></td><td style="padding:8px 10px;text-align:center;color:var(--text-gray);font-size:11px">'+fD(x.start)+'</td><td style="padding:8px 10px;text-align:center"><div style="display:flex;align-items:center;gap:6px;justify-content:center"><div style="width:56px;height:6px;background:#f0f0f0;border-radius:3px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+col+';border-radius:3px"></div></div><span style="font-weight:700;font-size:13px;color:'+col+'">'+x.weeks.toFixed(1)+'w</span></div></td><td style="padding:8px 10px;text-align:center;color:var(--text-gray);font-size:11px">'+x.sc+' cambio'+(x.sc!==1?'s':'')+'</td><td style="padding:8px 10px;font-weight:600;color:'+col+'">'+TLBL[x.et]+'</td></tr>';}).join('');if(withD.length===0){noD.style.display='block';noD.textContent='Aún no hay clientes con historial de ciclo. Los que crees a partir de ahora quedarán registrados automáticamente.';}else noD.style.display='none';destroyChart('velocity-dist-chart');if(won.length>0){const bins=[0,4,8,12,20,36,100],lbls=['<4w','4–8w','8–12w','12–20w','20–36w','36w+'];charts['velocity-dist-chart']=new Chart(document.getElementById('velocity-dist-chart'),{type:'bar',data:{labels:lbls,datasets:[{label:'Clientes cerrados',data:lbls.map((_,i)=>won.filter(x=>x.weeks>=bins[i]&&x.weeks<bins[i+1]).length),backgroundColor:'#40916c',borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,ticks:{stepSize:1}}}}});}destroyChart('velocity-stage-chart');const CS=currentPlatform==='baumapp'?STAGES:BS_STAGES;const stT=CS.map(s=>{const durs=[];clients.forEach(c=>{const sl=statusLog[c.id]||[];for(let i=0;i<sl.length;i++){if(sl[i].status===s.id){const nx=sl[i+1],ed=nx?new Date(nx.date):(c.status===s.id?new Date():null);if(ed){const w=(ed-new Date(sl[i].date))/MS_W;if(w>=0&&w<200)durs.push(w);}break;}}});return{label:s.label,avg:durs.length?(durs.reduce((a,b)=>a+b,0)/durs.length):null,color:s.color};}).filter(x=>x.avg!==null);if(stT.length>0){charts['velocity-stage-chart']=new Chart(document.getElementById('velocity-stage-chart'),{type:'bar',data:{labels:stT.map(x=>x.label),datasets:[{label:'Semanas prom. en etapa',data:stT.map(x=>parseFloat(x.avg.toFixed(1))),backgroundColor:stT.map(x=>x.color),borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,title:{display:true,text:'Semanas'}}}}});}}
 function injectIcons(){const map={'nav-ico-dash':ICO.dash,'nav-ico-pipe':ICO.pipeline,'nav-ico-cli':ICO.clients,'nav-ico-tar':ICO.tariff,'nav-ico-cal':ICO.calendar,'nav-ico-chart':ICO.chart,'nav-ico-usr':ICO.users,'nav-ico-vel':ICO.clock,'ico-ba':ICO.app,'ico-bs':ICO.leaf,'ico-csv':ICO.csv,'ico-warn-dash':ICO.warn,'ico-warn-2':ICO.warn,'ico-agendar':ICO.calendar,'ico-int-phone':ICO.phone,'ico-int-email':ICO.email,'ico-int-meet':ICO.meet,'ico-int-note':ICO.note};Object.keys(map).forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=map[id]})}
-function init(){document.getElementById('fx-rate').value=fxRate;updateSidebarForPlatform();renderDashboard();injectIcons();autoFetchFX()}
-function render(){renderDashboard();renderPipeline();renderClients()}
-
-// ─── MIGRACIÓN localStorage → Firebase ──────────────────────
-async function migrateToFirebase(){
-  if(!confirm('¿Migrar todos los datos locales a Firebase?\nEsto sobreescribirá los datos actuales en la nube.')) return;
-  try{
-    showToast('Migrando datos a Firebase…');
-    const ts = new Date().toISOString();
-    await db.collection('crm').doc('ba').set({
-      clients: ba_clients,
-      meetings: ba_meetings,
-      gmtgs: ba_globalMtgs,
-      actions: ba_actions,
-      weeklyLog: ba_weeklyLog,
-      statusLog: ba_statusLog,
-      interactions: ba_interactions,
-      tariff: BA_TARIFF,
-      billing: ba_billing,
-      updatedAt: ts
+function init(){
+  document.getElementById('fx-rate').value=fxRate;
+  updateSidebarForPlatform();
+  renderDashboard();
+  injectIcons();
+  autoFetchFX();
+  // Intentar cargar desde Google Sheets (si está configurado).
+  // Si hay datos más recientes en Sheets, los carga y re-renderiza.
+  if(SHEETS_API_URL){
+    _loadFromSheets().then(loaded=>{
+      if(loaded){renderDashboard();if(typeof renderPipeline==='function')renderPipeline();}
     });
-    await db.collection('crm').doc('bs').set({
-      clients: bs_clients,
-      meetings: bs_meetings,
-      gmtgs: bs_globalMtgs,
-      actions: bs_actions,
-      weeklyLog: bs_weeklyLog,
-      statusLog: bs_statusLog,
-      interactions: bs_interactions,
-      tariff: BS_TARIFF,
-      updatedAt: ts
-    });
-    await db.collection('crm').doc('settings').set({fxRate: fxRate, updatedAt: ts});
-    showToast('✅ Datos migrados a Firebase exitosamente');
-  }catch(e){
-    console.error('Migration error:', e);
-    alert('Error al migrar: ' + e.message);
   }
 }
-// ────────────────────────────────────────────────────────────
+function render(){renderDashboard();renderPipeline();renderClients()}
+// ─── ASYNC INIT: Carga Firebase primero, luego inicia la app ───
 (async function(){
   try{ await _loadFromFirebase(); }
-  catch(e){ console.warn('Firebase init error:', e); }
-  _firebaseReady=true; // a partir de aquí los saves a Firebase están permitidos
+  catch(e){ console.warn('Firebase init error, usando datos locales:', e); }
   document.getElementById('fb-loading').style.display='none';
   checkAuth();
   injectIcons();
@@ -2324,50 +2402,5 @@ function renderDealCardNextAction(client){if(!client.nextAction||!client.nextAct
 function renderPendingActions(){const container=document.getElementById('pending-actions-list');const today=new Date().toISOString().split('T')[0];const pending=[];clients.forEach(client=>{if(client.nextAction&&client.nextAction.date){pending.push({...client,actionDate:client.nextAction.date});}});pending.sort((a,b)=>a.actionDate.localeCompare(b.actionDate));container.innerHTML=pending.length===0?'<div style="text-align:center;color:var(--text-gray);padding:16px">Sin acciones pendientes</div>':'';pending.forEach(client=>{const status=getNextActionStatus(client.actionDate);const color=getNextActionColor(status);const icon=status==='red'?ICO.dot_red:status==='orange'?ICO.dot_orange:ICO.dot_gray;const el=document.createElement('div');el.style.cssText='padding:10px;background:#f9fafc;border-radius:6px;border-left:4px solid '+color+';cursor:pointer';el.innerHTML=`<div style="font-weight:600;font-size:12px">${client.name}</div><div style="font-size:11px;color:${color};margin-top:4px"><span>${icon}</span> ${client.nextAction.text} • ${client.actionDate}</div>`;el.onclick=()=>openEditModal(client.id);container.appendChild(el);});}
 function renderInactiveClients(){const container=document.getElementById('inactive-clients-list');const sevenDaysAgo=new Date();sevenDaysAgo.setDate(sevenDaysAgo.getDate()-7);const cutoffDate=sevenDaysAgo.toISOString().split('T')[0];const inactive=[];clients.forEach(client=>{if(client.status==='Activo'||client.status==='Perdido')return;const clientInteractions=interactions[client.id]||[];const hasRecentActivity=clientInteractions.some(i=>i.date>=cutoffDate);const hasNextAction=client.nextAction&&client.nextAction.date;if(!hasRecentActivity&&!hasNextAction){const daysSinceActivity=clientInteractions.length>0?Math.floor((new Date()-new Date(clientInteractions[clientInteractions.length-1].date))/86400000):9999;inactive.push({...client,daysSince:daysSinceActivity});}});inactive.sort((a,b)=>b.daysSince-a.daysSince);container.innerHTML=inactive.length===0?'<div style="text-align:center;color:var(--text-gray);padding:16px">Todos los clientes activos tienen seguimiento</div>':'';inactive.forEach(client=>{const el=document.createElement('div');el.style.cssText='padding:10px;background:#fff3e0;border-radius:6px;border-left:4px solid #fdab3d;cursor:pointer';el.innerHTML=`<div style="font-weight:600;font-size:12px">${client.name}</div><div style="font-size:11px;color:#b8860b;margin-top:4px">${ICO.pin} ${client.country} • ${client.status} <br>${ICO.warn} ${client.daysSince===9999?'Sin interacciones':client.daysSince+' días sin actividad'}</div>`;el.onclick=()=>openEditModal(client.id);container.appendChild(el);});};
   </script>
-
-<!-- Drawer menú móvil -->
-<div id="mobile-drawer-overlay" onclick="toggleMobileDrawer()"></div>
-<div id="mobile-drawer">
-  <div class="drawer-header">
-    <div class="drawer-logo">BaumApp</div>
-    <div class="drawer-sub">PIPELINE CRM</div>
-  </div>
-  <div class="drawer-section">BaumApp</div>
-  <button class="drawer-item active" id="di-dashboard" onclick="mobileGoTo('dashboard','di-dashboard')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg> Dashboard</button>
-  <button class="drawer-item" id="di-pipeline" onclick="mobileGoTo('pipeline','di-pipeline')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Pipeline</button>
-  <button class="drawer-item" id="di-clientes" onclick="mobileGoTo('clientes','di-clientes')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Clientes</button>
-  <button class="drawer-item" id="di-reuniones" onclick="mobileGoTo('reuniones','di-reuniones')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Reuniones</button>
-  <button class="drawer-item" id="di-tarifario" onclick="mobileGoTo('tarifario','di-tarifario')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Tarifario</button>
-  <div class="drawer-section">Análisis</div>
-  <button class="drawer-item" id="di-analisis" onclick="mobileGoTo('analisis','di-analisis')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg> Análisis Global</button>
-  <button class="drawer-item" id="di-velocidad" onclick="mobileGoTo('velocidad','di-velocidad')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Ciclo de Ventas</button>
-  <div class="drawer-section">Admin</div>
-  <button class="drawer-item" id="di-usuarios" onclick="mobileGoTo('usuarios','di-usuarios')"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg> Usuarios</button>
-</div>
-<script>
-function toggleMobileDrawer(){
-  document.getElementById('mobile-drawer').classList.toggle('open');
-  document.getElementById('mobile-drawer-overlay').classList.toggle('open');
-}
-function mobileGoTo(view, activeId){
-  document.querySelectorAll('#mobile-drawer .drawer-item').forEach(b=>b.classList.remove('active'));
-  const el=document.getElementById(activeId);
-  if(el) el.classList.add('active');
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  const vEl=document.getElementById('view-'+view);
-  if(vEl) vEl.classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
-  if(view==='dashboard') renderDashboard();
-  else if(view==='pipeline') renderPipeline();
-  else if(view==='clientes') renderClients();
-  else if(view==='analisis') renderAnalisis();
-  else if(view==='reuniones') renderReuniones();
-  else if(view==='tarifario') renderTarifario();
-  else if(view==='velocidad') renderVelocidad();
-  else if(view==='usuarios') renderUsersView();
-  toggleMobileDrawer();
-}
-</script>
-
 </body>
 </html>
