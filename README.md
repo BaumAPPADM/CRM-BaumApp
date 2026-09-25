@@ -1,21 +1,21 @@
-# BaumApp Pipeline CRM
+# BLUM CRM
 
-CRM de gestión de pipeline comercial para BaumApp y BaumSystem.
+Pipeline comercial de BLUM (Baum App): clientes directos, vendedores y partners.
 
 ## Acceso
 
-Publicado en GitHub Pages: [Ver CRM](https://baumappadm.github.io/CRM-BaumApp/)
+https://baumappadm.github.io/CRM-BaumApp/
 
-## Base de datos
+Solo entran usuarios creados por el administrador (correo y contraseña).
+Para agregar a alguien: Firebase console → proyecto **BLUM CRM** → Authentication → Usuarios → Agregar usuario.
 
-Los datos se respaldan automáticamente en **Google Sheets** cada vez que se guarda un cliente. Al abrir el CRM desde cualquier navegador o dispositivo, los datos se recuperan desde la nube.
+## Datos
 
-Como respaldo adicional, también se guardan localmente en el navegador (localStorage) para funcionar sin conexión.
+- Base de datos en línea: Firebase Firestore (proyecto `blum-crm`, Santiago). Todos ven los cambios al instante.
+- Solo usuarios con sesión iniciada pueden leer o escribir.
+- Respaldo: en el CRM, Ajustes → Respaldo completo → Descargar respaldo.
 
-## Configuración del respaldo en Google Sheets
+## Archivos
 
-Ver instrucciones completas en `GUIA_GOOGLE_SHEETS.md`.
-
-## Archivo único
-
-Todo el CRM está contenido en `index.html`. No requiere servidor ni instalación.
+- `index.html`: el CRM completo (un solo archivo).
+- `antiguo/`: el CRM anterior, guardado como referencia.
