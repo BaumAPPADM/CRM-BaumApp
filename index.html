@@ -569,6 +569,76 @@ ol.steps-list{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:
 .rep .rins{margin:0;padding-left:16px;display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:#0E2523}
 .rep .rins b{color:#002E2B}
 .rep .rf{font-size:9.5px;color:#6B7F7C;border-top:1px solid #DCE5E3;padding-top:8px}
+.fbtn,.mlist,.mstages{display:none}
+@media (max-width:760px){.dk{display:none}}
+.fcount{background:var(--accent);color:#fff;border-radius:99px;font-size:10.5px;padding:0 6px;font-weight:700}
+@media (max-width:760px){
+  .fbtn{display:inline-flex;margin:-4px 0 12px}
+  .main{padding-bottom:150px}
+  .filters:not(.open){display:none}
+  .filters .select,.filters .search{flex:1 1 45%;min-width:0}
+  .top{gap:8px;margin-bottom:14px}
+  .top h1{font-size:20px}
+  .top .sub{font-size:12px}
+  .top .grow{display:none}
+  .top>div:first-child{flex-basis:100%}
+  #x-png,#x-pdf{display:none}
+  .top .btn.primary[data-new]{position:fixed;right:16px;bottom:calc(74px + env(safe-area-inset-bottom,0px));z-index:31;border-radius:99px;padding:12px 18px;box-shadow:0 6px 18px rgba(0,46,43,.3)}
+  .kpis{gap:10px}
+  .kpi{padding:12px 14px}
+  .kpi .v{font-size:19px;white-space:nowrap}
+  .kpi .l{font-size:11.5px}
+  .goalp{padding:16px}
+  .ghead>b{font-size:24px}
+  .panel{padding:14px}
+  .panel h2,.fold-h .ft{font-size:15px}
+  .pie-body{flex-direction:column;align-items:stretch;gap:12px}
+  .pie-body svg{align-self:center}
+  .pie-tabs{display:flex;width:100%}.pie-tabs button{flex:1;padding:6px 4px}
+  .pie-leg{min-width:0;max-width:none}
+  .pl{grid-template-columns:10px 1fr 46px auto;column-gap:10px;row-gap:2px}
+  .pl.ph{display:none}
+  .pl .pu{grid-column:2/-1;text-align:left;font-size:12px;color:var(--ink-2);font-weight:500}
+  .pl.pt .pu{font-weight:700;color:var(--ink)}
+  .chtab th:nth-child(2),.chtab td:nth-child(2),.chtab th:nth-child(4),.chtab td:nth-child(4){display:none}
+  .chtab td:first-child{white-space:nowrap}
+  .chtab td,.chtab th{padding:9px 6px}
+  tr.sub td:first-child{padding-left:30px}
+  .cvrow{grid-template-columns:1fr 1fr}
+  .mbar{display:none}
+  table.simple td,table.simple th{padding:9px 6px}
+  .fold-h,.sec-h{flex-wrap:wrap;row-gap:2px}
+  .fold-h .fs,.sec-h .ss{flex-basis:100%;margin-left:26px;order:3}
+  .fold-h{padding:14px}
+  .fold-b{padding:4px 14px 14px}
+  .stiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+  .stile{padding:10px}.stile b{font-size:22px}.stile span{font-size:11px}
+  .mstages{display:flex;gap:6px;overflow-x:auto;margin:0 -16px 10px;padding:0 16px 4px;scrollbar-width:none}
+  .mstages::-webkit-scrollbar{display:none}
+  .mstages button{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:99px;padding:6px 12px;font-size:12.5px;font-weight:600;border-top:3px solid var(--c)}
+  .mstages button b{background:var(--surface-2);border-radius:99px;padding:0 7px;font-size:11px;color:var(--ink)}
+  .mstages button[aria-pressed="true"]{background:var(--accent-soft);color:var(--ink);border-color:var(--accent)}
+  .board{grid-template-columns:repeat(var(--n,6),86vw)}
+  .ctable{display:none}
+  .mlist{display:flex;flex-direction:column;gap:8px}
+  .mcard{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:6px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .mcard .mc-h b{font-size:14.5px}
+  .mcard .mc-r{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .mcard .mc-r .chip{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+  .mcard .mc-n{display:flex;justify-content:space-between;gap:8px;font-size:12.5px;color:var(--ink-2)}
+  .mcard .mc-n b{color:var(--ink)}
+  .mcard .mc-f{display:flex;gap:8px;align-items:center;font-size:12px;color:var(--ink-2);min-width:0}
+  .mcard .mc-f span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .dr-h{padding:calc(12px + env(safe-area-inset-top,0px)) 16px 12px;gap:10px}
+  .dr-h .t input{font-size:17px}
+  .steps{grid-template-columns:repeat(4,1fr)}
+  .dr-b{padding:12px}
+  .dr-f{padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+  .dr-f .grow{flex-basis:100%;height:0}
+  .dr-f [data-close].btn,.dr-f #d-save{flex:1;justify-content:center;padding:11px}
+  .drawer .sec-b .input,.drawer .sec-b textarea{font-size:16px}
+  .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+}
 .login{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:var(--bg);padding:16px}
 .login[hidden]{display:none}
 .lg-card{width:min(380px,100%);background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow)}
@@ -828,7 +898,8 @@ function fuChip(c){const f=fu(c);return `<span class="fu ${f.k}">${esc(f.l)}</sp
 function filterBar(opts={}){
   const f=S.f;const vias=S.partners.filter(p=>f.channel==='all'||p.kind===f.channel);
   const countries=countryList();const noCountry=S.clients.filter(c=>!norm(c.country)).length;
-  return `<div class="filters">
+  const nF=[f.country!=='all',f.stage!=='all'&&opts.stage!==false,f.channel!=='all',f.ptype!=='all',!!f.q,f.review].filter(Boolean).length;
+  return `<button class="btn sm fbtn noexp" id="f-toggle" aria-expanded="${!!S.fOpen}"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4"/></svg>${S.fOpen?'Ocultar filtros':'Filtros'}${nF?` <span class="fcount">${nF}</span>`:''}</button><div class="filters ${S.fOpen?'open':''}">
     <select class="select" id="f-country" aria-label="País"><option value="all">País: todos</option>${countries.map(c=>`<option value="${esc(c.name)}" ${norm(f.country)===norm(c.name)?'selected':''}>${esc(c.name)} (${c.n})</option>`).join('')}${noCountry?`<option value="" ${f.country===''?'selected':''}>Sin país (${noCountry})</option>`:''}</select>
     ${opts.stage!==false?`<select class="select" id="f-stage" aria-label="Etapa"><option value="all">Etapa: todas</option>${STAGES.map(s=>`<option value="${s.id}" ${f.stage===s.id?'selected':''}>${s.label}</option>`).join('')}</select>`:''}
     <div class="seg" role="group" aria-label="Canal de venta">${[['all','Todos los canales'],...Object.entries(CHANNELS).map(([k,v])=>[k,v.label])].map(([k,l])=>`<button data-fch="${k}" aria-pressed="${f.channel===k}">${l}</button>`).join('')}</div>
@@ -872,7 +943,7 @@ function vInicio(){
     <div class="stack">
       <section class="panel"><h2>Hectáreas por canal</h2><p class="hint">Las hectáreas que cierran los partners y vendedores se suman al total BLUM.</p>
         ${donut(t)}
-        <div style="overflow-x:auto"><table><thead><tr><th>Canal</th><th class="r">Clientes</th><th class="r">Ha cerradas</th><th class="r">Ha pipeline</th><th class="r">ARR</th></tr></thead><tbody>${chRows}<tr class="total"><td>Total BLUM</td><td class="r num">${t.n}</td><td class="r num">${ha(t.closed)}</td><td class="r num">${ha(t.pipe)}</td><td class="r num">${usd(t.arr)}</td></tr></tbody></table></div>
+        <div style="overflow-x:auto"><table class="chtab"><thead><tr><th>Canal</th><th class="r">Clientes</th><th class="r">Ha cerradas</th><th class="r">Ha pipeline</th><th class="r">ARR</th></tr></thead><tbody>${chRows}<tr class="total"><td>Total BLUM</td><td class="r num">${t.n}</td><td class="r num">${ha(t.closed)}</td><td class="r num">${ha(t.pipe)}</td><td class="r num">${usd(t.arr)}</td></tr></tbody></table></div>
       </section>
       <section class="panel"><h2>Embudo por etapa</h2><p class="hint">Barra sólida: hectáreas cerradas. Barra clara: potencial total de la etapa.</p><div class="funnel">${funnel}</div>
         ${countries.length?`<div class="legend">${countries.map(([c,v])=>`<span><b style="color:var(--ink)">${esc(c)}</b> ${ha(v)} ha cerradas</span>`).join('')}</div>`:''}
@@ -990,10 +1061,11 @@ function vPipeline(){
     return `<div class="col"><div class="col-h" style="--c:${s.c}"><div class="n">${s.label}<em class="num">${cs.length}</em></div><div class="m" title="${esc(s.exit)}">Prob. cierre ${s.p}%</div><div class="m num">${ha(x.closed)} ha cerradas · ${ha(x.pot)} ha pot.</div><div class="pc num" title="Hectáreas potenciales de la etapa sobre el total del pipeline"><span>${nf1.format(pct)}% del total</span><span class="bar"><i style="width:${pct}%;background:${s.c}"></i></span></div></div>
       <div class="col-b" data-stage="${s.id}">${cs.map(card).join('')}${S.canWrite?`<button class="add" data-new="${s.id}">+ Agregar</button>`:''}</div></div>`;
   }).join('');
-  return header('Pipeline',`${t.n} clientes · ${ha(t.pot)} ha potenciales en total · ${ha(t.closed)} cerradas · arrastra las tarjetas para ordenarlas`,`<div class="dlg" role="group" aria-label="Descargar"><span>Descargar</span><button class="btn sm" id="x-pipe-xlsx" title="Excel con el detalle de los clientes filtrados">Excel</button><button class="btn sm" id="x-pipe-pdf" title="PDF con el detalle por etapa de los clientes filtrados">PDF</button></div><button class="btn sm" id="exp-all" aria-pressed="${S.expandAll}">${S.expandAll?'Ocultar próximas acciones':'Ver próximas acciones'}</button>`+newBtn())+filterBar()+`<div class="board-wrap"><div class="board" style="--n:${stages.length}">${cols}</div></div>`;
+  return header('Pipeline',`${t.n} clientes · ${ha(t.pot)} ha potenciales en total · ${ha(t.closed)} cerradas · <span class="dk">arrastra las tarjetas para ordenarlas</span>`,`<div class="dlg" role="group" aria-label="Descargar"><span>Descargar</span><button class="btn sm" id="x-pipe-xlsx" title="Excel con el detalle de los clientes filtrados">Excel</button><button class="btn sm" id="x-pipe-pdf" title="PDF con el detalle por etapa de los clientes filtrados">PDF</button></div><button class="btn sm" id="exp-all" aria-pressed="${S.expandAll}">${S.expandAll?'Ocultar próximas acciones':'Ver próximas acciones'}</button>`+newBtn())+filterBar()+`<div class="mstages noexp" role="group" aria-label="Ir a la etapa">${stages.map((s,i)=>`<button data-jump="${i}" aria-pressed="${i===0}" style="--c:${s.c}">${s.short}<b class="num">${list.filter(c=>c.stage===s.id).length}</b></button>`).join('')}</div><div class="board-wrap"><div class="board" style="--n:${stages.length}">${cols}</div></div>`;
 }
 let dragId=null;
 function wireBoard(){
+  const bw=$('.board-wrap');if(bw&&!bw.dataset.sync){bw.dataset.sync='1';let tm;bw.addEventListener('scroll',()=>{clearTimeout(tm);tm=setTimeout(()=>{const cols=[...document.querySelectorAll('.board .col')];let best=0,bd=1e9;cols.forEach((c,i)=>{const d=Math.abs(c.offsetLeft-bw.scrollLeft);if(d<bd){bd=d;best=i}});document.querySelectorAll('.mstages button').forEach((b,i)=>{b.setAttribute('aria-pressed',i===best);if(i===best)b.scrollIntoView({block:'nearest',inline:'nearest'})})},80)},{passive:true})}
   document.querySelectorAll('.card[draggable="true"]').forEach(el=>{
     el.addEventListener('dragstart',e=>{dragId=el.dataset.id;el.classList.add('dragging');e.dataTransfer.effectAllowed='move';try{e.dataTransfer.setData('text/plain',dragId)}catch(_){}});
     el.addEventListener('dragend',()=>{el.classList.remove('dragging');clearMarks();dragId=null});
@@ -1027,7 +1099,8 @@ function vClientes(){
   const {k,d}=S.sort;list=[...list].sort((a,b)=>{const x=val[k](a),y=val[k](b);return (x>y?1:x<y?-1:0)*d});
   const t=totals(list.filter(c=>!c.lost));
   return header('Clientes',`${list.length} clientes · ${ha(t.closed)} ha cerradas · ${usd(t.arr)} ARR`,`<button class="btn noexp" id="x-xlsx-list">Descargar Excel</button>`+newBtn())+filterBar({lost:true})+`
-  <div class="table-wrap"><table><thead><tr>${cols.map(([key,l,r])=>`<th class="${r||''}" data-sort="${key}" ${k===key?`aria-sort="${d>0?'ascending':'descending'}"`:''}>${l} <span class="ar">${k===key?(d>0?'▲':'▼'):'▲'}</span></th>`).join('')}</tr></thead>
+  <div class="mlist">${list.map(c=>`<button class="mcard ${c.lost?'lost':''}" data-open="${esc(c.id)}"><div class="mc-h"><b>${esc(c.name)}</b>${c.review?' <span class="chip rv">Revisar</span>':''}</div><div class="mc-r">${chChip(c)}<span class="stage-pill"><span class="dot" style="background:${STAGE[c.stage]?.c}"></span>${c.lost?'Perdido':STAGE[c.stage]?.label||''}</span></div><div class="mc-n"><span><b class="num">${ha(closed(c))}</b> ha cerradas · ${ha(potential(c))} pot.</span><span class="num">${usd(arr(c))}</span></div>${c.nextAction?.text?`<div class="mc-f">${fuChip(c)}<span>${esc(c.nextAction.text)}</span></div>`:''}</button>`).join('')||'<div class="empty">No hay clientes con estos filtros.</div>'}</div>
+  <div class="table-wrap ctable"><table><thead><tr>${cols.map(([key,l,r])=>`<th class="${r||''}" data-sort="${key}" ${k===key?`aria-sort="${d>0?'ascending':'descending'}"`:''}>${l} <span class="ar">${k===key?(d>0?'▲':'▼'):'▲'}</span></th>`).join('')}</tr></thead>
   <tbody>${list.map(c=>{const pi=priceInfo(c);return `<tr data-open="${esc(c.id)}" class="${c.lost?'lost':''}"><td><b>${esc(c.name)}</b>${c.review?' <span class="chip" style="background:var(--bad-soft);color:var(--bad)">Revisar</span>':''}${c.contact?`<div style="font-size:12px;color:var(--muted)">${esc(c.contact)}</div>`:''}</td><td>${chChip(c)}${surveyLabel(c)?`<div style="font-size:11px;color:var(--muted);margin-top:3px">Levantamiento: ${esc(surveyLabel(c))}</div>`:''}</td><td><span class="stage-pill"><span class="dot" style="background:${STAGE[c.stage]?.c}"></span>${c.lost?'Perdido'+(c.lostReason?' · '+esc(c.lostReason):''):STAGE[c.stage]?.label||''}</span></td><td>${esc(c.country||'')}</td><td class="r num">${ha(closed(c))}</td><td class="r num">${ha(potential(c))}</td><td class="r num" title="Precio ${pi.src}">${nf1.format(pi.p)}</td><td class="r num">${usd(arr(c))}</td><td>${fuChip(c)}</td></tr>`}).join('')||`<tr><td colspan="9" class="empty">No hay clientes con estos filtros.</td></tr>`}</tbody></table></div>`;
 }
 /* ---------- Exportar ---------- */
@@ -1833,6 +1906,8 @@ document.addEventListener('click',async e=>{
   if(t.id==='g-cancel'){S.editGoal=false;render();return}
   if(t.id==='g-save'||t.id==='a-save'){const pre=t.id==='g-save'?'g':'a';const cfg=readGoal(pre);if(!(cfg.goalHa>0)){toast('Escribe la meta de hectáreas');return}if(cfg.startDate&&cfg.goalDate&&cfg.goalDate<=cfg.startDate){toast('La fecha meta debe ser posterior a la fecha de inicio');return}const data={...cfg};delete data.id;if(await safe(API.set('config','main',data),'Meta guardada')){S.config={...S.config,...data};S.editGoal=false;render()}return}
   if(ds.basenow){const el=document.getElementById(ds.basenow+'-base');if(el){el.value=Math.round(totals(active()).closed);updateGoalCalc()}return}
+  if(t.id==='f-toggle'){S.fOpen=!S.fOpen;render();return}
+  if(ds.jump!==undefined){const col=document.querySelectorAll('.board .col')[Number(ds.jump)];const w=$('.board-wrap');if(col&&w)w.scrollTo({left:col.offsetLeft-4,behavior:'smooth'});document.querySelectorAll('.mstages button').forEach((b,i)=>b.setAttribute('aria-pressed',i===Number(ds.jump)));return}
   if(t.id==='f-clear'){S.f={...S.f,channel:'all',via:'all',country:'all',stage:'all',ptype:'all',q:'',review:false};render();return}
   if(t.id==='f-review'){S.f.review=!S.f.review;render();return}
   if(t.id==='d-reviewed'){const id=S.drawer.id;readDraft();S.drawer.draft.review=null;const log=(S.drawer.draft.log||[]).map(e=>e.review?{...e,review:false,text:e.text.replace('[Revisar: puede ser de otro cliente] ','')}:e);S.drawer.draft.log=log;if(await safe(API.update('clients',id,{review:null,log}),'Marcado como revisado'))renderDrawer(true);return}
