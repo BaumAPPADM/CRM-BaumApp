@@ -17,5 +17,6 @@ Para agregar a alguien: Firebase console → proyecto **BLUM CRM** → Authentic
 
 ## Archivos
 
-- `index.html`: el CRM completo (un solo archivo).
-- `antiguo/`: el CRM anterior, guardado como referencia.
+- `index.html`: el CRM completo (un solo archivo), con pestañas de clientes activos, pipeline y embudo de cierre.
+- `prueba.html`: copia para probar cambios antes de pasarlos a `index.html`.
+- `antiguo/`: versiones anteriores del CRM, guardadas como referencia (`index-2026-11-13.html` es la versión previa a las pestañas nuevas).
